@@ -1,1 +1,737 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b1220">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="مدیریت مالی حرفه‌ای">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>حسابینو | مدیریت مالی حرفه‌ای</title>
+<style>
+:root{--bg:#eef2f7;--card:rgba(255,255,255,.76);--card2:rgba(255,255,255,.58);--text:#172033;--muted:#718096;--line:rgba(148,163,184,.22);--primary:#2563eb;--green:#16a34a;--red:#dc2626;--orange:#ea580c;--purple:#7c3aed;--shadow:0 16px 45px rgba(15,23,42,.09);--radius:22px}
+body.dark{--bg:#08111f;--card:rgba(15,23,42,.72);--card2:rgba(15,23,42,.55);--text:#f1f5f9;--muted:#94a3b8;--line:rgba(148,163,184,.16);--shadow:0 18px 55px rgba(0,0,0,.28)}
+*{box-sizing:border-box}html{scroll-behavior:auto}body{margin:0;font-family:Tahoma,"Vazirmatn",Arial,sans-serif;background:radial-gradient(circle at 15% 0%,rgba(37,99,235,.12),transparent 32%),var(--bg);color:var(--text);min-height:100vh}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0;color:inherit}.app{max-width:1180px;margin:auto;padding:18px 15px 110px}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.brand{display:flex;align-items:center;gap:11px}.logo{width:48px;height:48px;border-radius:16px;box-shadow:0 10px 25px rgba(37,99,235,.22)}.brand h1{font-size:20px;margin:0 0 4px}.brand p{margin:0;color:var(--muted);font-size:11px}.head-actions{display:flex;gap:7px}.iconbtn{width:42px;height:42px;border-radius:14px;background:var(--card);border:1px solid var(--line);backdrop-filter:blur(18px);box-shadow:var(--shadow);font-size:18px}
+.accountbar{display:flex;gap:8px;margin:10px 0 15px;overflow:auto;padding-bottom:2px}.accountbar button{white-space:nowrap;padding:10px 15px;border-radius:13px;background:var(--card);border:1px solid var(--line);color:var(--muted)}.accountbar button.active{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;border-color:transparent}
+.hero{border-radius:28px;padding:22px;background:linear-gradient(135deg,#0b1220,#173b82 72%,#2563eb);color:white;box-shadow:0 22px 50px rgba(15,23,42,.2);position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;background:rgba(255,255,255,.07);left:-45px;top:-60px}.hero-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;position:relative;z-index:1}.hero small{opacity:.72}.hero h2{font-size:29px;margin:8px 0}.hero .month{background:rgba(255,255,255,.1);padding:9px 12px;border-radius:13px;font-size:12px}.hero-bottom{display:flex;gap:9px;flex-wrap:wrap;margin-top:15px;position:relative;z-index:1}.mini{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.1);border-radius:13px;padding:9px 11px;font-size:11px}.mini b{display:block;font-size:13px;margin-top:3px}
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:14px 0}.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:14px;box-shadow:var(--shadow);backdrop-filter:blur(18px)}.stat .ico{font-size:20px}.stat b{display:block;font-size:15px;margin:8px 0 3px}.stat span{color:var(--muted);font-size:10px}
+.nav{display:flex;gap:7px;overflow:auto;margin:4px 0 15px;padding-bottom:2px}.nav button{white-space:nowrap;padding:10px 13px;border-radius:13px;background:var(--card);border:1px solid var(--line);color:var(--muted)}.nav button.active{color:var(--primary);background:rgba(37,99,235,.1);border-color:rgba(37,99,235,.25);font-weight:bold}
+.grid{display:grid;grid-template-columns:1.15fr .85fr;gap:14px}.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:17px;box-shadow:var(--shadow);backdrop-filter:blur(20px);margin-bottom:14px}.panel-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}.panel-title h3{margin:0;font-size:16px}.muted{color:var(--muted);font-size:11px}.add,.primary{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:white;padding:9px 13px;border-radius:12px}.secondary{background:rgba(148,163,184,.12);padding:9px 13px;border-radius:12px}.danger{background:#fee2e2;color:#b91c1c;padding:8px 10px;border-radius:10px}.success{color:var(--green)}.warning{color:var(--orange)}.negative{color:var(--red)}
+.chart{height:230px;position:relative}.chart canvas{width:100%;height:100%}.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:5px}.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;background:currentColor;margin-left:4px}
+.list{display:grid;gap:2px}.item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}.item:last-child{border-bottom:0}.item-main{display:flex;gap:10px;align-items:center;min-width:0}.dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto}.item b{font-size:12px}.item small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.money{font-weight:bold;font-size:12px;white-space:nowrap}.pill{font-size:9px;padding:4px 7px;border-radius:999px;background:rgba(37,99,235,.1);color:var(--primary)}.empty{text-align:center;color:var(--muted);padding:25px 10px;font-size:12px}
+.progress{height:9px;background:rgba(148,163,184,.18);border-radius:99px;overflow:hidden}.progress>i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#2563eb,#60a5fa)}.goal{padding:12px;border:1px solid var(--line);border-radius:16px;margin-bottom:9px}.goal-top{display:flex;justify-content:space-between;gap:10px}.goal strong{font-size:12px}.goal .nums{font-size:10px;color:var(--muted);margin:7px 0}
+.form{display:grid;gap:10px}.form label{display:block;font-size:10px;color:var(--muted);margin-bottom:5px}.form input,.form select,.form textarea{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:12px;outline:0;background:rgba(255,255,255,.65);color:var(--text)}body.dark .form input,body.dark .form select,body.dark .form textarea{background:rgba(2,6,23,.35)}.form textarea{min-height:70px;resize:vertical}.form input:focus,.form select:focus,.form textarea:focus{border-color:rgba(37,99,235,.55)}.row{display:grid;grid-template-columns:1fr 1fr;gap:9px}.three{grid-template-columns:repeat(3,1fr)}
+.filters{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:8px;margin-bottom:12px}.filters input,.filters select{padding:10px;border:1px solid var(--line);border-radius:11px;background:var(--card);color:var(--text);outline:0}
+.datefield{display:grid;grid-template-columns:1fr 42px;gap:6px}.datefield button{border:1px solid var(--line);border-radius:12px;background:rgba(37,99,235,.1);color:var(--primary)}.jpicker{position:fixed;z-index:120;background:var(--bg);border:1px solid var(--line);border-radius:18px;box-shadow:0 25px 70px rgba(0,0,0,.28);padding:12px;width:min(340px,calc(100vw - 24px))}.jpicker-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}.jpicker-head button{width:34px;height:34px;border-radius:10px;background:var(--card)}.jpicker-title{font-weight:bold;font-size:13px}.jpicker-week,.jpicker-days{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}.jpicker-week span{font-size:9px;color:var(--muted);text-align:center;padding:4px}.jday{padding:8px 2px;border-radius:9px;background:transparent}.jday:hover,.jday.active{background:var(--primary);color:#fff}.jday.empty{pointer-events:none} .loan-widget{border:1px solid var(--line);border-radius:18px;padding:14px;background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(37,99,235,.05));margin-bottom:10px}.loan-widget-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.loan-widget-title{display:flex;align-items:center;gap:9px}.loan-widget-icon{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:rgba(16,185,129,.13);font-size:20px}.loan-widget-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.loan-widget-stat{border:1px solid var(--line);border-radius:12px;padding:9px;background:var(--card)}.loan-widget-stat b{display:block;font-size:12px}.loan-widget-stat span{display:block;color:var(--muted);font-size:9px;margin-top:3px}.loan-widget-next{margin-top:9px;padding:9px 10px;border-radius:12px;background:rgba(148,163,184,.08);font-size:10px;display:flex;justify-content:space-between;gap:8px;align-items:center}.loan-widget-actions{display:flex;gap:7px;margin-top:10px}.loan-widget-actions button{flex:1}.loan-widget-empty{text-align:center;color:var(--muted);font-size:10px;padding:6px}.datefield input{direction:ltr;text-align:center}.loan-card{border:1px solid var(--line);border-radius:17px;padding:14px;margin-bottom:9px}.loan-top{display:flex;justify-content:space-between;gap:10px}.loan-bank{font-size:10px;color:var(--muted);margin-top:4px}.loan-meta{display:flex;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:10px;margin:8px 0}.bank-select{font-size:11px}.debt-card{border:1px solid var(--line);border-radius:16px;padding:13px;margin-bottom:8px}.debt-head{display:flex;justify-content:space-between;gap:10px}.debt-head strong{font-size:13px}.debt-meta{display:flex;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:10px;margin:7px 0}.actions{display:flex;gap:6px;flex-wrap:wrap}.actions button{padding:7px 9px;border-radius:9px;background:rgba(148,163,184,.12);font-size:10px}
+.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:11px}.table th,.table td{text-align:right;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap}.table th{color:var(--muted);font-weight:normal}
+.alert{padding:11px 12px;border-radius:13px;margin-bottom:8px;font-size:11px;background:rgba(234,88,12,.09);border:1px solid rgba(234,88,12,.16)}.alert.red{background:rgba(220,38,38,.08);border-color:rgba(220,38,38,.15)}.alert.green{background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.15)}
+.modal{position:fixed;inset:0;background:rgba(2,6,23,.62);display:flex;align-items:flex-end;justify-content:center;padding:12px;z-index:220;backdrop-filter:blur(5px)}.modal.hidden{display:none;pointer-events:none}.modal:not(.hidden){pointer-events:auto}.sheet{width:min(560px,100%);max-height:92vh;overflow:auto;background:var(--bg);border:1px solid var(--line);border-radius:25px;padding:17px;box-shadow:0 30px 80px rgba(0,0,0,.3);padding-bottom:22px}.sheet-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.sheet-head h3{margin:0;font-size:17px}.close{width:35px;height:35px;border-radius:11px;background:rgba(148,163,184,.12)}
+.fab{position:fixed;left:18px;bottom:20px;width:58px;height:58px;border-radius:19px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;font-size:28px;box-shadow:0 16px 35px rgba(37,99,235,.35);z-index:30}.fab-menu{position:fixed;left:18px;bottom:87px;display:grid;gap:7px;z-index:29}.fab-menu.hidden{display:none}.fab-menu button{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);padding:10px 12px;border-radius:12px;font-size:11px}
+.view.hidden{display:none!important}.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.setting-btn{width:100%;padding:12px;border-radius:12px;background:var(--card2);border:1px solid var(--line);text-align:right}.toast{position:fixed;right:50%;transform:translateX(50%) translateY(20px);bottom:22px;background:#0f172a;color:white;padding:11px 16px;border-radius:12px;font-size:11px;opacity:0;pointer-events:none;transition:.25s;z-index:100}.toast.show{opacity:1;transform:translateX(50%) translateY(0)}
+.lock{position:fixed;inset:0;background:linear-gradient(145deg,#07101f,#142f69);z-index:200;display:flex;align-items:center;justify-content:center;padding:20px;color:white}.lock.hidden{display:none}.lock-box{width:min(390px,100%);text-align:center}.lock-box .logo{margin:auto}.pin-dots{font-size:25px;letter-spacing:8px;margin:20px}.pin-input{width:100%;padding:15px;border:1px solid rgba(255,255,255,.2);border-radius:14px;background:rgba(255,255,255,.1);color:white;text-align:center;font-size:22px;outline:0}.note{font-size:10px;color:var(--muted);line-height:1.8}
+@media(max-width:900px){.stats{grid-template-columns:repeat(3,1fr)}.grid{grid-template-columns:1fr}}
+@media(max-width:600px){.app{padding:13px 11px 100px}.brand h1{font-size:17px}.logo{width:43px;height:43px}.stats{grid-template-columns:repeat(2,1fr)}.stat:last-child{grid-column:1/-1}.filters{grid-template-columns:1fr 1fr}.filters input{grid-column:1/-1}.row,.three,.settings-grid{grid-template-columns:1fr}.hero h2{font-size:24px}.panel{padding:14px}.nav button{font-size:10px}.chart{height:210px}}
 
+/* حسابینو • iOS glass UI */
+:root{--primary:#22c55e;--primary2:#84cc16;--ios-blue:#0a84ff;--glass:rgba(255,255,255,.62);--glass-dark:rgba(18,24,32,.72)}
+body{background:radial-gradient(circle at 50% -8%,rgba(132,204,22,.20),transparent 30%),radial-gradient(circle at 0% 55%,rgba(34,197,94,.13),transparent 28%),linear-gradient(180deg,#f6f8fb,#eaf0f4 55%,#eef2f5);letter-spacing:-.1px}
+body.dark{background:radial-gradient(circle at 50% -8%,rgba(132,204,22,.16),transparent 30%),radial-gradient(circle at 0% 55%,rgba(34,197,94,.10),transparent 28%),#07110d}
+.nav{display:none}
+.app{max-width:980px;padding:14px 14px calc(118px + env(safe-area-inset-bottom));}
+header{padding:2px 2px 10px}.brand{gap:10px}.brand h1{font-size:19px;font-weight:800}.logo{border-radius:15px}
+.head-actions{gap:6px}.iconbtn{width:40px;height:40px;border-radius:14px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.72);box-shadow:0 8px 24px rgba(15,23,42,.07);backdrop-filter:blur(22px);transition:transform .22s cubic-bezier(.2,.8,.2,1),background .22s}.iconbtn:active{transform:scale(.92)}
+.hero{border-radius:30px;padding:22px;background:linear-gradient(145deg,#111814 0%,#17251b 45%,#263c21 100%);box-shadow:0 22px 55px rgba(16,32,20,.20);border:1px solid rgba(255,255,255,.08)}
+.hero:before{content:"";position:absolute;width:220px;height:220px;border-radius:50%;right:-85px;bottom:-120px;background:rgba(132,204,22,.18);filter:blur(4px)}
+.hero h2{font-size:30px;letter-spacing:-1px}.hero .month{border:1px solid rgba(255,255,255,.10);backdrop-filter:blur(15px)}
+.stats{grid-template-columns:repeat(4,1fr);gap:9px;margin:12px 0}.stats .stat:nth-child(5){display:none}.stat{border-radius:20px;padding:13px;background:var(--glass);border:1px solid rgba(255,255,255,.68);box-shadow:0 12px 32px rgba(15,23,42,.07);backdrop-filter:blur(22px);transition:transform .22s}.stat:active{transform:scale(.98)}
+.panel{border-radius:22px;background:var(--glass);border:1px solid rgba(255,255,255,.68);box-shadow:0 12px 34px rgba(15,23,42,.065);backdrop-filter:blur(24px);transition:transform .22s,box-shadow .22s}.panel-title h3{font-weight:800}
+.loan-widget,.loan-card,.debt-card,.goal{background:rgba(255,255,255,.38);backdrop-filter:blur(18px);border-color:rgba(255,255,255,.6)}
+.primary,.add{background:linear-gradient(135deg,#22c55e,#65a30d);box-shadow:0 8px 20px rgba(34,197,94,.20)}
+.bottom-nav{position:fixed;z-index:80;left:50%;bottom:calc(8px + env(safe-area-inset-bottom));transform:translateX(-50%);width:min(520px,calc(100vw - 22px));height:72px;padding:7px;display:grid;grid-template-columns:repeat(4,1fr);gap:5px;border:1px solid rgba(255,255,255,.76);border-radius:26px;background:rgba(255,255,255,.70);backdrop-filter:blur(30px) saturate(160%);-webkit-backdrop-filter:blur(30px) saturate(160%);box-shadow:0 18px 55px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.85)}
+body.dark .bottom-nav{background:rgba(18,24,32,.78);border-color:rgba(255,255,255,.10);box-shadow:0 18px 55px rgba(0,0,0,.36)}
+.bottom-nav button{position:relative;background:transparent;border-radius:19px;color:#7b8794;font-size:9px;font-weight:600;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;transition:transform .22s cubic-bezier(.2,.8,.2,1),color .22s,background .22s}.bottom-nav button:active{transform:scale(.90)}
+.bottom-nav button span{font-size:21px;line-height:1}.bottom-nav button.active{color:#1f8f43;background:rgba(34,197,94,.12);font-weight:800}.bottom-nav button.active:after{content:"";position:absolute;bottom:4px;width:4px;height:4px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px rgba(34,197,94,.7)}
+.view{animation:viewIn .34s cubic-bezier(.2,.75,.25,1)}@keyframes viewIn{from{opacity:0;transform:translateY(8px) scale(.992)}to{opacity:1;transform:none}}
+.more-menu{position:fixed;z-index:79;left:50%;bottom:91px;transform:translateX(-50%);width:min(520px,calc(100vw - 22px));padding:12px;display:grid;grid-template-columns:repeat(2,1fr);gap:8px;border:1px solid rgba(255,255,255,.76);border-radius:24px;background:rgba(255,255,255,.76);backdrop-filter:blur(28px);box-shadow:0 22px 60px rgba(15,23,42,.18)}
+.more-menu.hidden{display:none}.more-menu button{padding:12px;border-radius:16px;background:rgba(255,255,255,.48);border:1px solid rgba(255,255,255,.65);text-align:right;font-size:11px}
+.fab{left:auto;right:18px;bottom:calc(92px + env(safe-area-inset-bottom));width:54px;height:54px;border-radius:19px;background:linear-gradient(135deg,#22c55e,#65a30d);box-shadow:0 14px 30px rgba(34,197,94,.28);font-size:25px;z-index:81}.fab:active{transform:scale(.91)}.fab-menu{left:auto;right:18px;bottom:calc(154px + env(safe-area-inset-bottom))}
+@media(max-width:600px){.app{padding:10px 11px calc(124px + env(safe-area-inset-bottom))}.brand p{display:none}.hero{padding:18px;border-radius:25px}.hero h2{font-size:25px}.hero-bottom{gap:6px}.mini{padding:8px 9px}.stats{grid-template-columns:repeat(2,1fr);margin:10px 0}.stats .stat:nth-child(5){display:none}.stat{padding:11px}.stat b{font-size:13px}.grid{gap:10px}.panel{padding:13px;border-radius:20px}.bottom-nav{height:70px}.fab{bottom:calc(88px + env(safe-area-inset-bottom));right:14px}.fab-menu{bottom:calc(150px + env(safe-area-inset-bottom));right:14px}}
+
+/* حسابینو v8 • iOS Glass Premium Home */
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Tahoma,"Vazirmatn",Arial,sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:-20% -10% auto;height:60vh;pointer-events:none;background:radial-gradient(circle at 78% 20%,rgba(163,230,53,.20),transparent 28%),radial-gradient(circle at 20% 10%,rgba(34,197,94,.14),transparent 30%);z-index:-1}
+.app{max-width:560px;margin:0 auto;padding:calc(10px + env(safe-area-inset-top)) 12px calc(132px + env(safe-area-inset-bottom));}
+header{position:sticky;top:0;z-index:20;margin:0 -12px 12px;padding:8px 12px 10px;background:rgba(246,248,251,.58);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);border-bottom:1px solid rgba(255,255,255,.45)}
+body.dark header{background:rgba(7,17,13,.58)}
+.brand h1{font-size:18px;letter-spacing:-.5px}.brand p{font-size:10px}.head-actions .iconbtn{width:38px;height:38px;border-radius:13px;font-size:16px}
+.hero{margin-top:4px;padding:20px;border-radius:30px;background:linear-gradient(145deg,#07110b 0%,#132319 45%,#254a1e 100%);border:1px solid rgba(255,255,255,.11);box-shadow:0 25px 60px rgba(20,45,24,.22);min-height:208px}
+.hero:after{width:290px;height:290px;left:-120px;top:-160px;background:radial-gradient(circle,rgba(132,204,22,.22),rgba(132,204,22,0) 68%);filter:none}
+.hero:before{width:250px;height:250px;right:-105px;bottom:-145px;background:radial-gradient(circle,rgba(74,222,128,.30),rgba(74,222,128,0) 68%);filter:none}
+.hero-top{align-items:flex-start}.hero small{font-size:10px}.hero h2{font-size:31px;margin:10px 0 3px;letter-spacing:-1.2px}.hero .month{font-size:10px;padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.09)}
+.hero-bottom{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:22px}.mini{padding:9px 7px;border-radius:14px;background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.08);font-size:9px;white-space:nowrap;overflow:hidden}.mini b{font-size:10px;margin-top:4px;overflow:hidden;text-overflow:ellipsis}
+.stats{grid-template-columns:repeat(4,1fr);gap:8px;margin:10px 0}.stat{padding:11px 8px;border-radius:18px;text-align:center;background:rgba(255,255,255,.52);box-shadow:0 10px 28px rgba(15,23,42,.055)}.stat .ico{font-size:18px}.stat b{font-size:11px;margin:6px 0 2px}.stat span{font-size:8px}.stats .stat:nth-child(5){display:none}
+.home-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin:12px 0 14px}.home-action{min-height:78px;border-radius:21px;border:1px solid rgba(255,255,255,.72);background:rgba(255,255,255,.52);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 10px 30px rgba(15,23,42,.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;color:var(--text);font-size:9px;font-weight:700;transition:transform .18s,background .18s}.home-action:active{transform:scale(.94)}.home-action i{font-style:normal;width:36px;height:36px;display:grid;place-items:center;border-radius:13px;background:rgba(34,197,94,.13);font-size:19px}.home-action.loan i{background:rgba(10,132,255,.12)}.home-action.income i{background:rgba(34,197,94,.12)}.home-action.expense i{background:rgba(239,68,68,.10)}
+.section-card{border-radius:24px!important;padding:15px!important}.section-card .panel-title{margin-bottom:9px}.section-card .panel-title h3{font-size:14px}
+.dashboard-grid-mobile{display:grid;gap:11px}.dashboard-full{grid-column:1/-1}.dashboard-two{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.quick-badge{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;border-radius:16px;background:rgba(255,255,255,.34);border:1px solid rgba(255,255,255,.48);font-size:10px}.quick-badge b{font-size:11px}
+.bottom-nav{width:min(500px,calc(100vw - 20px));height:76px;padding:7px;border-radius:28px;background:rgba(255,255,255,.68);border:1px solid rgba(255,255,255,.88);box-shadow:0 20px 60px rgba(15,23,42,.18),inset 0 1px 0 rgba(255,255,255,.95)}
+.bottom-nav button{border-radius:21px;font-size:9px;gap:4px}.bottom-nav button span{font-size:20px;font-weight:500}.bottom-nav button.active{background:rgba(34,197,94,.13);color:#16803b}.bottom-nav button.active:after{bottom:5px}
+.fab{width:52px;height:52px;right:14px;border-radius:18px;bottom:calc(92px + env(safe-area-inset-bottom));font-size:24px}
+@media(max-width:600px){.hero-bottom{grid-template-columns:repeat(4,1fr)}.home-actions{gap:7px}.home-action{min-height:74px}.dashboard-two{grid-template-columns:1fr}.stats{grid-template-columns:repeat(4,1fr)}.stats .stat{min-width:0}.stat span{white-space:nowrap}.stat b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bottom-nav{height:72px}}
+
+
+/* v9 iOS Blue Glass refinement */
+:root{--primary:#0a84ff;--bg:#eef6ff;--card:rgba(255,255,255,.62);--card2:rgba(255,255,255,.48);--line:rgba(120,170,220,.24)}
+body{background:radial-gradient(circle at 12% 0%,rgba(10,132,255,.16),transparent 32%),radial-gradient(circle at 90% 25%,rgba(90,190,255,.12),transparent 28%),var(--bg)}
+body:before{background:radial-gradient(circle at 78% 20%,rgba(10,132,255,.18),transparent 30%),radial-gradient(circle at 20% 10%,rgba(90,190,255,.13),transparent 32%)}
+header{background:rgba(245,250,255,.58);border-bottom-color:rgba(255,255,255,.7)}
+.today-jalali{font-size:9px;color:#0a84ff;font-weight:700;margin-top:3px;white-space:nowrap}
+.hero{background:linear-gradient(145deg,#071b33 0%,#0a3d78 48%,#0a84ff 100%);box-shadow:0 25px 60px rgba(10,70,130,.20)}
+.hero:after{background:radial-gradient(circle,rgba(110,210,255,.22),rgba(110,210,255,0) 68%)}
+.hero:before{content:"";position:absolute;width:250px;height:250px;right:-105px;bottom:-145px;background:radial-gradient(circle,rgba(90,190,255,.30),rgba(90,190,255,0) 68%)}
+.home-action i{background:rgba(10,132,255,.12)}
+.home-action.loan i,.home-action.income i,.home-action.expense i{background:rgba(10,132,255,.12)}
+.bottom-nav{height:82px;background:rgba(240,248,255,.70);border-color:rgba(255,255,255,.94);box-shadow:0 20px 60px rgba(10,70,130,.18),inset 0 1px 0 rgba(255,255,255,.98)}
+.bottom-nav button{font-size:10px;gap:5px;border-radius:23px;color:#6d7f95}
+.bottom-nav button span.ios-icon{width:32px;height:32px;display:grid;place-items:center}
+.bottom-nav button span.ios-icon svg{width:27px;height:27px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.bottom-nav button.active{background:rgba(10,132,255,.13);color:#0879eb}
+.bottom-nav button.active:after{background:#0a84ff;box-shadow:0 0 10px rgba(10,132,255,.7)}
+.primary,.add,.accountbar button.active{background:linear-gradient(135deg,#0a84ff,#006ee6)}
+.progress>i{background:linear-gradient(90deg,#0a84ff,#5ac8fa)}
+.fab{background:linear-gradient(135deg,#0a84ff,#006ee6);box-shadow:0 14px 30px rgba(10,132,255,.28)}
+@media(max-width:600px){.bottom-nav{height:80px}.bottom-nav button span.ios-icon{width:35px;height:35px}.bottom-nav button span.ios-icon svg{width:30px;height:30px}}
+
+/* v10 • Hesabino iOS Glass complete polish */
+:root{--ios-blue:#0a84ff;--ios-blue2:#5ac8fa;--glass-blue:rgba(235,247,255,.68);--glass-border:rgba(255,255,255,.92)}
+body{background:radial-gradient(circle at 50% -10%,rgba(90,200,250,.24),transparent 31%),radial-gradient(circle at 4% 48%,rgba(10,132,255,.14),transparent 28%),linear-gradient(180deg,#f5fbff 0%,#eaf5ff 52%,#edf6fc 100%)}
+body.dark{background:radial-gradient(circle at 50% -10%,rgba(10,132,255,.20),transparent 32%),radial-gradient(circle at 4% 48%,rgba(90,200,250,.10),transparent 28%),#071522}
+body:before{background:radial-gradient(circle at 78% 20%,rgba(90,200,250,.20),transparent 30%),radial-gradient(circle at 20% 10%,rgba(10,132,255,.14),transparent 32%)}
+header{background:rgba(245,251,255,.66);border-bottom-color:rgba(255,255,255,.82)}
+body.dark header{background:rgba(7,21,34,.64)}
+.today-jalali{font-size:11px;color:#0879eb;font-weight:800;margin-top:5px;letter-spacing:-.2px}
+.hero{background:linear-gradient(145deg,#061b32 0%,#08467f 47%,#0a84ff 100%);box-shadow:0 25px 65px rgba(10,70,130,.22);border-color:rgba(255,255,255,.16)}
+.hero .month{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.16)}
+.hero-bottom .mini{background:rgba(255,255,255,.105);border-color:rgba(255,255,255,.13)}
+.stat,.home-action,.panel,.loan-widget,.loan-card,.debt-card,.goal{background:var(--glass-blue);border-color:var(--glass-border);box-shadow:0 12px 34px rgba(10,70,130,.075)}
+body.dark .stat,body.dark .home-action,body.dark .panel,body.dark .loan-widget,body.dark .loan-card,body.dark .debt-card,body.dark .goal{background:rgba(12,35,55,.62);border-color:rgba(255,255,255,.10)}
+.home-action{position:relative;overflow:hidden}.home-action:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent 48%);pointer-events:none}
+.home-action i{background:rgba(10,132,255,.14);color:#0879eb}
+.primary,.add,.accountbar button.active{background:linear-gradient(135deg,#0a84ff,#006ee6);box-shadow:0 8px 22px rgba(10,132,255,.22)}
+.secondary{background:rgba(10,132,255,.08);border:1px solid rgba(10,132,255,.10)}
+.progress>i{background:linear-gradient(90deg,#0a84ff,#5ac8fa)}
+.bottom-nav{width:min(510px,calc(100vw - 18px));height:86px;padding:7px;border-radius:30px;background:rgba(239,249,255,.76);border:1px solid rgba(255,255,255,.96);box-shadow:0 22px 65px rgba(10,70,130,.20),inset 0 1px 0 rgba(255,255,255,.98)}
+body.dark .bottom-nav{background:rgba(9,27,43,.82);border-color:rgba(255,255,255,.11)}
+.bottom-nav button{font-size:10px;gap:6px;border-radius:23px;color:#6d8297}
+.bottom-nav button span.ios-icon{width:38px;height:38px}
+.bottom-nav button span.ios-icon svg{width:32px;height:32px;stroke-width:1.85}
+.bottom-nav button.active{background:rgba(10,132,255,.14);color:#0879eb;box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}
+.bottom-nav button.active:after{background:#0a84ff;box-shadow:0 0 12px rgba(10,132,255,.75)}
+.fab{left:50%;right:auto;transform:translateX(-50%);bottom:calc(67px + env(safe-area-inset-bottom));width:60px;height:60px;border-radius:21px;border:4px solid rgba(245,251,255,.88);background:linear-gradient(145deg,#0a84ff,#006ee6);box-shadow:0 14px 34px rgba(10,132,255,.36),0 0 0 1px rgba(255,255,255,.35);font-size:29px;z-index:82;display:grid;place-items:center;transition:transform .2s,box-shadow .2s}
+.fab:active{transform:translateX(-50%) scale(.92)}
+.fab-menu{right:50%;transform:translateX(50%);bottom:calc(145px + env(safe-area-inset-bottom));width:min(360px,calc(100vw - 28px));padding:10px;display:grid;grid-template-columns:repeat(2,1fr);gap:7px;border:1px solid rgba(255,255,255,.9);border-radius:23px;background:rgba(239,249,255,.82);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);box-shadow:0 22px 60px rgba(10,70,130,.22)}
+.fab-menu button{padding:11px;border-radius:15px;background:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.75);font-size:10px;text-align:center}
+body.dark .fab-menu{background:rgba(9,27,43,.88);border-color:rgba(255,255,255,.12)}
+.bank-badge{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;flex:0 0 auto;background:linear-gradient(145deg,#0a84ff,#5ac8fa);color:#fff;font-weight:900;font-size:10px;box-shadow:0 7px 18px rgba(10,132,255,.20);border:1px solid rgba(255,255,255,.55)}
+.bank-badge small{font-size:17px;line-height:1}.bank-line{display:flex;align-items:center;gap:9px}.loan-widget-title .bank-badge{width:42px;height:42px}
+.smart-status{display:inline-flex;align-items:center;gap:5px;padding:5px 8px;border-radius:999px;font-size:9px;font-weight:800}.smart-status.ok{background:rgba(34,197,94,.11);color:#159447}.smart-status.warn{background:rgba(245,158,11,.12);color:#b96b00}.smart-status.bad{background:rgba(239,68,68,.11);color:#c62828}
+@media(max-width:600px){.bottom-nav{height:84px}.bottom-nav button span.ios-icon{width:40px;height:40px}.bottom-nav button span.ios-icon svg{width:33px;height:33px}.fab{width:58px;height:58px;bottom:calc(66px + env(safe-area-inset-bottom))}.fab-menu{bottom:calc(140px + env(safe-area-inset-bottom))}.today-jalali{font-size:10px}}
+
+/* v11 • premium floating navigation */
+.bottom-nav{bottom:calc(22px + env(safe-area-inset-bottom));}
+.fab{bottom:calc(35px + env(safe-area-inset-bottom));}
+.fab:hover{box-shadow:0 18px 42px rgba(10,132,255,.44),0 0 0 1px rgba(255,255,255,.45);}
+.bottom-nav:before{content:"";position:absolute;inset:0;border-radius:30px;pointer-events:none;background:linear-gradient(120deg,rgba(255,255,255,.30),rgba(255,255,255,0) 45%,rgba(90,200,250,.08));}
+.bottom-nav button{position:relative;z-index:1;}
+.fab{border-color:rgba(255,255,255,.96);}
+body.dark .fab{border-color:rgba(255,255,255,.18);}
+@media(max-width:600px){.bottom-nav{bottom:calc(20px + env(safe-area-inset-bottom));}.fab{bottom:calc(33px + env(safe-area-inset-bottom));}.fab-menu{bottom:calc(108px + env(safe-area-inset-bottom));}}
+
+/* v12 • premium finance polish */
+body{background:radial-gradient(circle at 12% 0%,rgba(10,132,255,.10),transparent 32%),radial-gradient(circle at 88% 18%,rgba(90,200,250,.10),transparent 30%),var(--bg)}
+.panel,.hero,.stat{transition:transform .28s ease,box-shadow .28s ease,border-color .28s ease}.panel:hover,.stat:hover{transform:translateY(-2px);box-shadow:0 18px 42px rgba(10,70,130,.10)}
+.view{animation:viewIn .32s cubic-bezier(.2,.8,.2,1)}
+@keyframes viewIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.hero{overflow:hidden;position:relative}.hero:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-70px;top:-80px;background:rgba(255,255,255,.18);filter:blur(3px);pointer-events:none}
+.balance-delta{display:inline-flex;align-items:center;gap:5px;margin-top:7px;padding:5px 9px;border-radius:999px;background:rgba(255,255,255,.20);font-size:10px;font-weight:800;backdrop-filter:blur(10px)}
+.balance-delta.up{color:#087a55}.balance-delta.down{color:#b42318}.balance-delta.flat{color:var(--muted)}
+.premium-profile{display:flex;align-items:center;justify-content:space-between;gap:12px}.profile-main{display:flex;align-items:center;gap:11px}.profile-avatar{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#0a84ff,#5ac8fa);color:#fff;font-weight:900;font-size:18px;box-shadow:0 10px 25px rgba(10,132,255,.22)}
+.profile-main h3{margin:0 0 3px;font-size:14px}.profile-main p{margin:0;color:var(--muted);font-size:10px}.profile-chip{padding:7px 10px;border-radius:999px;background:rgba(10,132,255,.10);color:#0879eb;font-size:10px;font-weight:800}
+.mini-trend{height:92px;position:relative}.mini-trend canvas{width:100%;height:100%}.premium-stat{display:flex;align-items:center;justify-content:space-between;gap:10px}.premium-stat .spark{width:70px;height:34px}.premium-stat .spark canvas{width:100%;height:100%}
+.bottom-nav{grid-template-columns:1fr 1fr 1.15fr 1fr 1fr!important;height:82px!important;padding:7px!important;bottom:calc(22px + env(safe-area-inset-bottom))!important}
+.bottom-nav .center-action{background:linear-gradient(145deg,#0a84ff,#5ac8fa)!important;color:#fff!important;width:58px;height:58px!important;border-radius:20px!important;align-self:center;justify-self:center;box-shadow:0 12px 28px rgba(10,132,255,.30),inset 0 1px 0 rgba(255,255,255,.55);transform:translateY(-15px)}
+.bottom-nav .center-action span{font-size:32px!important;font-weight:300!important}.bottom-nav .center-action:after{display:none!important}.bottom-nav .center-action:active{transform:translateY(-15px) scale(.92)}
+.bottom-nav button:not(.center-action){min-height:58px}.fab{display:none!important}.fab-menu{bottom:calc(122px + env(safe-area-inset-bottom));right:50%;transform:translateX(50%);display:grid;grid-template-columns:1fr 1fr;gap:7px;width:min(330px,calc(100vw - 28px));padding:10px;border-radius:22px;background:rgba(240,249,255,.88);backdrop-filter:blur(25px);box-shadow:0 20px 60px rgba(10,70,130,.22)}
+body.dark .fab-menu{background:rgba(9,27,43,.92)}
+.fab-menu.hidden{display:none}.fab-menu button{border-radius:15px;padding:11px;background:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.75)}
+body.dark .fab-menu button{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.10)}
+@media(max-width:600px){.bottom-nav{bottom:calc(20px + env(safe-area-inset-bottom))!important}.bottom-nav .center-action{width:56px;height:56px!important}.app{padding-bottom:125px}}
+
+/* v14 • settings icon fix */
+.bottom-nav .ios-icon{overflow:visible!important;flex:0 0 40px;width:40px!important;height:40px!important;display:grid!important;place-items:center!important;position:relative;z-index:3;}
+.bottom-nav .ios-icon svg{display:block;overflow:visible;vector-effect:non-scaling-stroke;width:32px!important;height:32px!important;stroke-linecap:round;stroke-linejoin:round;}
+@media(max-width:600px){.bottom-nav .ios-icon{flex-basis:40px;width:40px!important;height:40px!important}.bottom-nav .ios-icon svg{width:31px!important;height:31px!important}}
+</style>
+<style>
+/* v13 premium feature layer */
+.premium-search{display:none;display:flex;align-items:center;gap:8px;margin:10px 0 12px}.premium-search input{flex:1;border-radius:16px;padding:12px 14px;background:rgba(255,255,255,.52);border:1px solid rgba(255,255,255,.8);backdrop-filter:blur(18px)}body.dark .premium-search input{background:rgba(10,28,45,.7);border-color:rgba(255,255,255,.1)}
+.v13-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:12px}.smart-card{background:linear-gradient(135deg,rgba(10,132,255,.12),rgba(90,200,250,.07));border:1px solid rgba(10,132,255,.16)}
+.smart-row{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:11px}.smart-row:last-child{border-bottom:0}.smart-positive{color:#16a34a}.smart-negative{color:#dc2626}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-top:10px}.calendar div{min-height:34px;border-radius:10px;display:grid;place-items:center;font-size:10px;background:rgba(255,255,255,.35);border:1px solid transparent}.calendar .head{background:transparent;color:var(--muted);font-weight:800}.calendar .today{background:rgba(10,132,255,.16);color:#0879eb;border-color:rgba(10,132,255,.25);font-weight:900}.calendar .has-event{box-shadow:inset 0 -3px 0 #0a84ff}.calendar .event-overdue{box-shadow:inset 0 -3px 0 #dc2626}
+.bank-list{display:grid;gap:8px}.bank-row{display:flex;align-items:center;justify-content:space-between;padding:10px;border-radius:15px;background:rgba(255,255,255,.38);border:1px solid var(--line)}.bank-row-main{display:flex;align-items:center;gap:9px}.bank-balance{font-weight:900}.notify-toggle{display:flex;align-items:center;justify-content:space-between;padding:12px;border-radius:15px;background:rgba(10,132,255,.07)}
+.search-results{position:fixed;z-index:110;left:50%;top:96px;transform:translateX(-50%);width:min(560px,calc(100vw - 24px));max-height:60vh;overflow:auto;padding:10px;border-radius:22px;background:rgba(240,249,255,.94);backdrop-filter:blur(28px);box-shadow:0 24px 70px rgba(10,70,130,.28)}body.dark .search-results{background:rgba(8,25,40,.95)}.search-result{padding:10px;border-bottom:1px solid var(--line);cursor:pointer}.search-result:last-child{border-bottom:0}.search-result small{display:block;color:var(--muted);margin-top:3px}
+@media(max-width:700px){.v13-grid{grid-template-columns:1fr}.premium-search{margin-top:5px}.search-results{top:82px}}
+.premium-search{display:none!important}
+.premium-search{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;border:0!important}
+</style>
+<style id="hesabino-v17-theme">
+:root{--h-blue:#087ff5;--h-blue2:#5ac8fa;--h-ink:#173b66;--h-muted:#7187a0;--h-bg:#dff2ff;--h-card:rgba(255,255,255,.62);}
+body{background:radial-gradient(circle at 50% -10%,#ffffff 0,#eaf8ff 30%,#d7efff 72%,#cfeaff 100%)!important;color:var(--h-ink)!important;overflow-x:hidden;}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 15%,rgba(255,255,255,.75),transparent 25%),radial-gradient(circle at 90% 75%,rgba(90,200,250,.14),transparent 30%);z-index:-1;}
+.app{max-width:680px!important;padding:12px 16px 138px!important;margin:auto;}
+header{height:72px!important;margin:0 0 12px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;direction:rtl!important;}
+.brand{display:flex!important;flex-direction:row!important;align-items:center!important;gap:11px!important;text-align:right!important;order:2;}
+.brand .logo{width:52px!important;height:52px!important;border-radius:17px!important;box-shadow:0 8px 24px rgba(10,132,255,.15)!important;}
+.brand h1{font-size:22px!important;color:#124a7f!important;margin:0!important;font-weight:900!important;letter-spacing:-.8px!important;}
+.brand p{font-size:10px!important;color:#7891a9!important;margin:3px 0 0!important;}
+.today-jalali{font-size:10px!important;color:#5e7892!important;margin-top:3px!important;}
+.head-actions{order:1;display:flex!important;gap:9px!important;}
+.head-actions .iconbtn{width:50px!important;height:50px!important;border-radius:50%!important;border:1px solid rgba(255,255,255,.9)!important;background:rgba(255,255,255,.62)!important;box-shadow:0 8px 22px rgba(44,108,150,.10),inset 0 1px 0 rgba(255,255,255,.95)!important;color:#174e83!important;font-size:22px!important;backdrop-filter:blur(18px)!important;}
+.hesabino-dashboard{display:block!important;}
+.hero-hesabino{min-height:430px!important;margin:0!important;padding:25px 20px 19px!important;border-radius:30px!important;background:linear-gradient(145deg,#0a376f 0%,#0756a9 48%,#0790ff 100%)!important;border:1px solid rgba(255,255,255,.62)!important;box-shadow:0 24px 60px rgba(0,91,171,.27),inset 0 1px 0 rgba(255,255,255,.55)!important;color:#fff!important;overflow:hidden!important;position:relative!important;}
+.hero-hesabino:after{content:""!important;position:absolute!important;inset:auto auto -100px -90px!important;width:330px!important;height:330px!important;border-radius:50%!important;background:radial-gradient(circle,rgba(22,140,255,.65),rgba(22,140,255,0) 68%)!important;filter:none!important;}
+.hero-hesabino:before{content:""!important;position:absolute!important;right:-90px!important;top:120px!important;width:320px!important;height:220px!important;border-radius:50%!important;background:radial-gradient(circle,rgba(10,170,255,.42),rgba(10,170,255,0) 70%)!important;filter:none!important;}
+.hero-glow{position:absolute;pointer-events:none;border-radius:50%;filter:blur(2px);}.hero-glow-a{width:260px;height:170px;left:-60px;top:125px;background:rgba(255,255,255,.08);transform:rotate(12deg);}.hero-glow-b{width:240px;height:150px;right:-55px;bottom:-35px;background:rgba(76,195,255,.2);}
+.hero-hesabino .hero-top,.hero-hesabino .hero-current,.hero-hesabino .hero-stats,.hero-hesabino .hero-trend{position:relative;z-index:2;}
+.hero-top{display:flex!important;justify-content:space-between!important;align-items:flex-start!important;direction:rtl!important;}
+.hero-balance{text-align:right;direction:rtl}.hero-balance small{font-size:11px!important;opacity:.78!important}.hero-balance h2{font-size:39px!important;line-height:1.15!important;margin:9px 0 4px!important;font-weight:900!important;letter-spacing:-1.5px!important;}.hero-date{display:flex;align-items:center;gap:7px;font-size:12px;padding:10px 13px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.10);border-radius:16px;backdrop-filter:blur(15px);}.hero-calendar{font-size:17px;opacity:.8}.hero-current{display:flex;align-items:center;justify-content:space-between;margin-top:6px;font-size:11px;color:rgba(255,255,255,.72)}.hero-current b{font-size:12px;color:#fff}.balance-delta{display:inline-flex!important;padding:7px 12px!important;border-radius:18px!important;background:rgba(255,255,255,.10)!important;border:1px solid rgba(255,255,255,.15)!important;color:#cfe9ff!important;font-size:10px!important;margin:2px 0!important;}.hero-hesabino .balance-delta.flat{color:#d6ecff!important}.hero-stats{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:8px!important;margin-top:23px!important;direction:rtl!important;}.hero-stat{min-width:0;padding:12px 6px 11px;border-radius:17px;background:rgba(255,255,255,.105);border:1px solid rgba(255,255,255,.14);text-align:center;box-shadow:inset 0 1px 0 rgba(255,255,255,.1);}.hero-stat-icon{width:27px;height:27px;display:grid;place-items:center;border-radius:50%;margin:0 auto 5px;font-weight:900;font-size:17px;background:rgba(255,255,255,.11)}.income-icon{color:#4ee09b}.expense-icon{color:#ff4e7c}.loan-icon{color:#a7d8ff}.debt-icon{color:#ff6f9d}.hero-stat small{display:block;font-size:9px;color:rgba(255,255,255,.82)}.hero-stat b{display:block;font-size:13px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.hero-stat em{display:block;font-style:normal;font-size:8px;opacity:.68;margin-top:1px}.hero-trend{margin:17px 0 0 auto;width:max-content;max-width:100%;display:flex;gap:10px;align-items:center;padding:10px 14px;border-radius:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);font-size:9px}.hero-trend strong{color:#32ef99;font-size:11px;}
+.home-action-grid{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:10px!important;margin:14px 0!important;direction:rtl!important;}.home-action-card{min-height:94px!important;border-radius:21px!important;border:1px solid rgba(255,255,255,.85)!important;background:rgba(255,255,255,.64)!important;box-shadow:0 10px 30px rgba(44,109,153,.08),inset 0 1px 0 rgba(255,255,255,.95)!important;backdrop-filter:blur(22px)!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:5px!important;color:#244967!important;padding:8px 5px!important;}.home-action-card span{width:39px;height:39px;border-radius:50%;display:grid;place-items:center;font-size:23px;font-weight:900;background:rgba(10,132,255,.11);color:#087ff5;box-shadow:inset 0 1px 0 rgba(255,255,255,.7)}.home-action-card b{font-size:10px!important;white-space:nowrap}.home-action-card small{font-size:8px;color:#2582c9}.home-action-card.expense span{color:#ff3b79;background:rgba(255,59,121,.10)}.home-action-card.income span{color:#10a779;background:rgba(16,167,121,.10)}.home-action-card.saving span{color:#e4aa00;background:rgba(255,206,58,.14)}.home-action-card.analysis span{color:#11b994;background:rgba(49,207,178,.12)}.home-action-card.reports span{color:#ff3b86;background:rgba(255,59,134,.10)}.home-action-card.debts span{color:#087ff5}.home-action-card.banks span{color:#1767c8;background:rgba(38,139,230,.10)}.home-action-card.receipt span{color:#6257e8;background:rgba(98,87,232,.11)}
+.profile-card{width:100%;min-height:92px;border:1px solid rgba(255,255,255,.88);border-radius:23px;background:rgba(255,255,255,.65);box-shadow:0 10px 30px rgba(44,109,153,.08),inset 0 1px 0 rgba(255,255,255,.95);backdrop-filter:blur(22px);display:flex;align-items:center;gap:11px;padding:12px 14px;direction:rtl;text-align:right;color:#214967;}.profile-card .profile-avatar{width:56px;height:56px;border-radius:18px;background:linear-gradient(145deg,#0a84ff,#28a7ff);color:#fff;display:grid;place-items:center;font-size:22px;font-weight:900;box-shadow:0 8px 22px rgba(10,132,255,.28)}.profile-copy{display:flex;flex-direction:column;gap:4px;flex:1}.profile-copy b{font-size:14px}.profile-copy small{font-size:9px;color:#7a91a6}.profile-card .profile-chip{background:#d7ecff;color:#087ff5;border-radius:18px;padding:9px 12px;font-size:10px;font-weight:900}.month-summary-card,.loan-near-card{margin-top:12px;border-radius:23px;background:rgba(255,255,255,.60);border:1px solid rgba(255,255,255,.88);box-shadow:0 10px 30px rgba(44,109,153,.07),inset 0 1px 0 rgba(255,255,255,.95);backdrop-filter:blur(22px);padding:15px 14px;direction:rtl}.summary-head,.loan-near-head{display:flex;justify-content:space-between;align-items:center}.summary-head h3,.loan-near-head h3{margin:0;font-size:14px;color:#173f62}.summary-head small{display:block;color:#7d93a6;font-size:9px;margin-top:3px}.summary-arrow{font-size:24px;color:#6e9fc2}.summary-content{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;align-items:center;margin-top:12px;padding:10px;border-radius:18px;background:rgba(232,248,255,.55);border:1px solid rgba(255,255,255,.75);}.summary-content .smart-row{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;border-left:1px solid rgba(110,150,180,.18);min-height:50px;gap:5px;}.summary-content .smart-row:last-child{border-left:0}.summary-content .smart-row span{font-size:9px;color:#7d91a2}.summary-content .smart-row b{font-size:11px;color:#149c7a;white-space:nowrap}.summary-content .smart-row:first-child b{color:#159c78}.loan-near-head button{background:none;border:0;color:#1584d7;font-size:10px;font-weight:800}.loan-near-card #loanWidget{margin-top:8px}.loan-near-card .loan-widget{background:transparent!important;border:0!important;padding:0!important;box-shadow:none!important}.loan-near-card .loan-widget-head{display:none}.loan-near-card .loan-widget-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:7px}.loan-near-card .loan-widget-stat{background:rgba(226,246,255,.58);border:1px solid rgba(255,255,255,.75);border-radius:16px;padding:10px;text-align:center}.loan-near-card .loan-widget-stat b{font-size:11px}.loan-near-card .loan-widget-stat span{font-size:8px;color:#7b91a5}.loan-near-card .loan-widget-next,.loan-near-card .loan-widget-actions{display:none!important}.legacy-dashboard-data{display:none!important}.nav{display:none!important}.premium-search{display:none!important}
+.bottom-nav{z-index:200!important;width:min(660px,calc(100vw - 28px))!important;height:76px!important;bottom:calc(18px + env(safe-area-inset-bottom))!important;border-radius:29px!important;background:rgba(246,252,255,.74)!important;border:1px solid rgba(255,255,255,.95)!important;box-shadow:0 20px 55px rgba(20,93,139,.20),inset 0 1px 0 rgba(255,255,255,.98)!important;backdrop-filter:blur(30px) saturate(170%)!important;direction:rtl!important;}.bottom-nav:before{background:linear-gradient(120deg,rgba(255,255,255,.35),rgba(255,255,255,0) 48%,rgba(90,200,250,.10))!important}.bottom-nav button:not(.center-action){color:#365d7d!important;font-size:9px!important;min-height:60px!important;border-radius:21px!important}.bottom-nav button.active{color:#087ff5!important;background:rgba(10,132,255,.13)!important}.bottom-nav button.active:after{background:#087ff5!important}.bottom-nav .center-action{width:59px!important;height:59px!important;border-radius:22px!important;background:linear-gradient(145deg,#087ff5,#49bfff)!important;box-shadow:0 13px 30px rgba(10,132,255,.32),inset 0 1px 0 rgba(255,255,255,.62)!important;transform:translateY(-16px)!important}.bottom-nav .center-action span{font-size:33px!important;color:#fff!important}.bottom-nav .ios-icon{width:37px!important;height:37px!important}.bottom-nav .ios-icon svg{width:29px!important;height:29px!important;stroke-width:1.75!important}
+@media(max-width:600px){.app{padding:8px 11px 125px!important}.brand .logo{width:47px!important;height:47px!important}.brand h1{font-size:20px!important}.head-actions .iconbtn{width:48px!important;height:48px!important}.hero-hesabino{min-height:410px!important;padding:21px 16px 17px!important;border-radius:27px!important}.hero-balance h2{font-size:33px!important}.hero-stats{gap:6px!important;margin-top:20px!important}.hero-stat{padding:10px 4px}.hero-stat b{font-size:11px}.home-action-grid{gap:8px!important}.home-action-card{min-height:87px!important;border-radius:19px!important}.home-action-card span{width:35px;height:35px;font-size:20px}.home-action-card b{font-size:9px}.home-action-card small{font-size:7px}.profile-card{min-height:84px}.summary-content{grid-template-columns:1.1fr 1fr 1fr 1fr;padding:7px}.summary-content .smart-row b{font-size:9px}.summary-content .smart-row span{font-size:7px}.loan-near-card .loan-widget-grid{gap:5px}.bottom-nav{height:76px!important;bottom:calc(18px + env(safe-area-inset-bottom))!important}.bottom-nav .center-action{width:56px!important;height:56px!important}.bottom-nav button:not(.center-action){min-height:56px!important}.bottom-nav .ios-icon svg{width:27px!important;height:27px!important}}
+</style>
+
+<style>
+/* v18 • bottom tab bar matched to reference */
+.bottom-nav{
+  z-index:200!important;
+  width:min(680px,calc(100vw - 22px))!important;
+  height:74px!important;
+  padding:6px!important;
+  bottom:calc(15px + env(safe-area-inset-bottom))!important;
+  border-radius:30px!important;
+  background:rgba(247,252,255,.78)!important;
+  border:1px solid rgba(255,255,255,.96)!important;
+  box-shadow:0 14px 42px rgba(21,91,139,.20),inset 0 1px 0 rgba(255,255,255,.98)!important;
+  backdrop-filter:blur(30px) saturate(175%)!important;
+  -webkit-backdrop-filter:blur(30px) saturate(175%)!important;
+  direction:rtl!important;
+  grid-template-columns:1fr 1fr 1.05fr 1fr 1fr!important;
+  gap:3px!important;
+}
+.bottom-nav:before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(110deg,rgba(255,255,255,.38),rgba(255,255,255,0) 45%,rgba(93,196,255,.08))!important;
+}
+.bottom-nav button:not(.center-action){
+  min-height:60px!important;
+  border-radius:23px!important;
+  color:#315b7b!important;
+  font-size:9px!important;
+  font-weight:700!important;
+  gap:3px!important;
+  position:relative;
+  z-index:2;
+}
+.bottom-nav button:not(.center-action) .ios-icon{
+  width:34px!important;height:34px!important;
+}
+.bottom-nav button:not(.center-action) .ios-icon svg{
+  width:28px!important;height:28px!important;
+  stroke-width:1.75!important;
+}
+.bottom-nav button.active{
+  color:#087ff5!important;
+  background:rgba(10,132,255,.12)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.72)!important;
+}
+.bottom-nav button.active:after{
+  width:5px!important;height:5px!important;
+  bottom:4px!important;
+  background:#0a84ff!important;
+  box-shadow:0 0 10px rgba(10,132,255,.65)!important;
+}
+.bottom-nav .center-action{
+  position:relative!important;
+  z-index:5!important;
+  width:62px!important;height:62px!important;
+  min-height:62px!important;
+  justify-self:center!important;align-self:center!important;
+  border-radius:50%!important;
+  transform:translateY(-18px)!important;
+  border:3px solid rgba(255,255,255,.92)!important;
+  background:linear-gradient(145deg,#087ff5 0%,#168fff 52%,#5ac8fa 100%)!important;
+  color:#fff!important;
+  box-shadow:0 10px 25px rgba(10,132,255,.34),0 0 0 1px rgba(10,132,255,.10),inset 0 1px 0 rgba(255,255,255,.55)!important;
+}
+.bottom-nav .center-action:before{
+  content:"";position:absolute;inset:5px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.22);pointer-events:none;
+}
+.bottom-nav .center-action span{
+  font-size:34px!important;line-height:1!important;font-weight:300!important;
+  color:#fff!important;transform:translateY(-1px);
+}
+.bottom-nav .center-action:after{display:none!important}
+.bottom-nav .center-action:active{transform:translateY(-18px) scale(.92)!important}
+@media(max-width:600px){
+  .bottom-nav{width:calc(100vw - 18px)!important;height:74px!important;bottom:calc(14px + env(safe-area-inset-bottom))!important;border-radius:29px!important}
+  .bottom-nav button:not(.center-action){min-height:58px!important;font-size:9px!important}
+  .bottom-nav button:not(.center-action) .ios-icon{width:34px!important;height:34px!important}
+  .bottom-nav button:not(.center-action) .ios-icon svg{width:28px!important;height:28px!important}
+  .bottom-nav .center-action{width:60px!important;height:60px!important;min-height:60px!important;transform:translateY(-18px)!important}
+  .bottom-nav .center-action:active{transform:translateY(-18px) scale(.92)!important}
+  .bottom-nav .center-action span{font-size:33px!important}
+}
+
+/* حسابینو v19 stability */
+html,body{overflow-x:hidden!important}.view{animation:none!important}header{position:relative!important;top:auto!important;border-bottom:0!important}header:before,header:after{display:none!important}body.dark{color:#eaf4ff!important;background:radial-gradient(circle at 50% -10%,rgba(10,132,255,.20),transparent 32%),radial-gradient(circle at 4% 48%,rgba(10,132,255,.09),transparent 28%),#071522!important}body.dark header{background:rgba(7,21,34,.82)!important;border-bottom:0!important;box-shadow:none!important}body.dark .iconbtn,body.dark .stat,body.dark .home-action,body.dark .panel,body.dark .loan-widget,body.dark .loan-card,body.dark .debt-card,body.dark .goal{background:rgba(11,31,49,.76)!important;border-color:rgba(255,255,255,.10)!important;color:#eaf4ff!important}body.dark .form input,body.dark .form select,body.dark .form textarea,body.dark .filters input,body.dark .filters select{background:rgba(4,16,28,.82)!important;color:#eef7ff!important;border-color:rgba(255,255,255,.12)!important}body.dark .modal{background:rgba(0,8,16,.78)!important}body.dark .sheet{background:#0a1a2a!important;border-color:rgba(255,255,255,.10)!important;color:#eef7ff!important}body.dark .jpicker{background:#0a1a2a!important;border-color:rgba(255,255,255,.12)!important;color:#eef7ff!important}body.dark .jpicker-head button{background:rgba(255,255,255,.07)!important}body.dark .more-menu,body.dark .fab-menu{background:rgba(8,25,41,.94)!important;border-color:rgba(255,255,255,.12)!important}body.dark .fab-menu button,body.dark .more-menu button{background:rgba(255,255,255,.06)!important;border-color:rgba(255,255,255,.10)!important;color:#eef7ff!important}body.dark .bottom-nav{background:rgba(8,25,41,.90)!important;border-color:rgba(255,255,255,.12)!important}body.dark .bottom-nav button:not(.center-action){color:#b9cce0!important}body.dark .bottom-nav button.active{color:#5ab4ff!important;background:rgba(10,132,255,.16)!important}.datefield input.invalid{border-color:#ef4444!important;box-shadow:0 0 0 2px rgba(239,68,68,.10)}
+</style>
+</head>
+<body>
+<div id="lockScreen" class="lock hidden">
+ <div class="lock-box"><img class="logo" src="icon-192.png" alt="لوگوی حسابینو"><h2>مدیریت مالی</h2><p>برنامه قفل است؛ PIN را وارد کنید.</p><input id="unlockPin" class="pin-input" type="password" inputmode="numeric" maxlength="8" placeholder="••••" onkeydown="if(event.key==='Enter')unlock()"><button class="primary" style="width:100%;margin-top:10px" onclick="unlock()">باز کردن</button><p id="lockMsg" class="note"></p></div>
+</div>
+<div class="app" id="app">
+<header><div class="brand"><img class="logo" src="icon-192.png" alt="لوگوی حسابینو"><div><h1>حسابینو</h1><p>ساده، خصوصی و آفلاین</p><div class="today-jalali" id="todayJalali">امروز</div></div></div><div class="head-actions"><button class="iconbtn" onclick="togglePrivacy()" title="مخفی کردن مبالغ">👁️</button><button class="iconbtn" onclick="toggleDark()" title="حالت تاریک">🌙</button></div></header>
+<div class="premium-search"><input id="globalSearch" placeholder="جستجوی سریع در تراکنش، قسط و بدهی..." oninput="globalSearch(this.value)"><button class="iconbtn" onclick="clearGlobalSearch()">×</button></div>
+<div id="searchResults" class="search-results hidden"></div>
+
+
+<section class="hero">
+ <div class="hero-top"><div><small>موجودی قابل خرج — <span id="accountName">حساب شخصی</span></small><h2 id="spendable">۰ تومان</h2><div id="balanceDelta" class="balance-delta flat">بدون تغییر نسبت به دیروز</div><small>درآمد − هزینه − پس‌انداز</small></div><div class="month" id="monthName">ماه جاری</div></div>
+ <div class="hero-bottom"><div class="mini">درآمد ماه<b id="heroIncome">۰</b></div><div class="mini">هزینه ماه<b id="heroExpense">۰</b></div><div class="mini">پس‌انداز<b id="heroSaving">۰</b></div><div class="mini">طلب مشتریان<b id="heroDebt">۰</b></div><div class="mini">وام باقی‌مانده<b id="heroLoanDebt">۰</b></div></div>
+</section>
+
+<div class="stats">
+ <div class="stat premium-stat"><div><div class="ico">📈</div><b id="totalIncome">۰</b><span>کل درآمد</span></div><div class="spark"><canvas id="incomeSpark"></canvas></div></div>
+ <div class="stat premium-stat"><div><div class="ico">📉</div><b id="totalExpense">۰</b><span>کل هزینه</span></div><div class="spark"><canvas id="expenseSpark"></canvas></div></div>
+ <div class="stat"><div class="ico">💰</div><b id="totalSaving">۰</b><span>پس‌انداز</span></div>
+ <div class="stat"><div class="ico">👥</div><b id="totalDebt">۰</b><span>طلب از مشتریان</span></div>
+ <div class="stat"><div class="ico">🎯</div><b id="goalProgress">۰٪</b><span>پیشرفت اهداف</span></div>
+</div>
+
+<nav class="nav" id="nav"><button class="active" onclick="showView('dashboard',this)">داشبورد</button><button onclick="showView('transactions',this)">تراکنش‌ها</button><button onclick="showView('debts',this)">بدهکاران</button><button onclick="showView('loans',this)">🏦 اقساط بانکی</button><button onclick="showView('savings',this)">پس‌انداز</button><button onclick="showView('budgets',this)">بودجه</button><button onclick="showView('reports',this)">گزارش‌ها</button></nav>
+
+<main>
+<section id="dashboard" class="view hesabino-dashboard">
+  <section class="hero hero-hesabino">
+    <div class="hero-glow hero-glow-a"></div><div class="hero-glow hero-glow-b"></div>
+    <div class="hero-top">
+      <div class="hero-balance">
+        <small>موجودی کل حساب‌ها</small>
+        <h2 id="spendable">۰ تومان</h2>
+        <div id="balanceDelta" class="balance-delta flat">بدون تغییر نسبت به دیروز</div>
+      </div>
+      <div class="hero-date"><span id="monthName">ماه جاری</span><span class="hero-calendar">▣</span></div>
+    </div>
+    <div class="hero-current"><span>ماه جاری</span><b id="accountName">حساب شخصی</b></div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="hero-stat-icon income-icon">↑</span><small>درآمدها</small><b id="heroIncome">۰</b><em>تومان</em></div>
+      <div class="hero-stat"><span class="hero-stat-icon expense-icon">↓</span><small>هزینه‌ها</small><b id="heroExpense">۰</b><em>تومان</em></div>
+      <div class="hero-stat"><span class="hero-stat-icon loan-icon">▣</span><small>اقساط</small><b id="heroLoanDebt">۰</b><em>تومان</em></div>
+      <div class="hero-stat"><span class="hero-stat-icon debt-icon">!</span><small>بدهی‌ها</small><b id="heroDebt">۰</b><em>تومان</em></div>
+    </div>
+    <div class="hero-trend"><span>تغییر نسبت به دیروز</span><strong>↑ <span id="heroTrendValue">۳.۲٪</span></strong></div>
+  </section>
+
+  <div class="home-action-grid">
+    <button class="home-action-card analysis" onclick="renderSmartAnalysis();document.querySelector('#smartAnalysis')?.scrollIntoView({behavior:'smooth'})"><span>⌁</span><b>تحلیل مالی</b><small>هوشمند</small></button>
+    <button class="home-action-card reports" onclick="showViewFromBottom('reports')"><span>⌁</span><b>گزارش‌ها</b><small>۳ گزارش</small></button>
+    <button class="home-action-card saving" onclick="showViewFromBottom('savings')"><span>♙</span><b>پس‌انداز</b><small>۱ مورد</small></button>
+    <button class="home-action-card debts" onclick="showViewFromBottom('debts')"><span>♟</span><b>طلب‌ها و بدهی‌ها</b><small>۲ مورد</small></button>
+    <button class="home-action-card banks" onclick="openSettings();setTimeout(()=>document.querySelector('#bankAccountsList')?.scrollIntoView({behavior:'smooth'}),80)"><span>◆</span><b>حساب بانک‌ها</b><small>۳ حساب</small></button>
+    <button class="home-action-card receipt" onclick="openTransaction('expense')"><span>▤</span><b>فاکتور / رسید</b><small>۵ مورد</small></button>
+    <button class="home-action-card expense" onclick="openTransaction('expense')"><span>↘</span><b>ثبت هزینه</b><small>سریع</small></button>
+    <button class="home-action-card income" onclick="openTransaction('income')"><span>↗</span><b>ثبت درآمد</b><small>سریع</small></button>
+  </div>
+
+  <button class="profile-card" onclick="openSettings()">
+    <span class="profile-avatar" id="profileAvatar">ح</span>
+    <span class="profile-copy"><b id="profileTitle">حساب شخصی</b><small id="profileSubtitle">مدیریت حرفه‌ای، با امکانات ویژه</small></span>
+    <span class="profile-chip">Premium</span>
+  </button>
+
+  <section class="month-summary-card">
+    <div class="summary-head"><div><h3>📊 خلاصه این ماه</h3><small>مقایسه با ماه قبل</small></div><span class="summary-arrow">‹</span></div>
+    <div id="monthlySummary" class="summary-content"></div>
+  </section>
+
+  <section class="loan-near-card">
+    <div class="loan-near-head"><h3>▣ اقساط نزدیک</h3><button onclick="showViewFromBottom('loans')">مشاهده همه ›</button></div>
+    <div id="loanWidget"></div>
+  </section>
+
+  <div class="legacy-dashboard-data" aria-hidden="true">
+    <div id="smartAnalysis"></div><div id="financialCalendar"></div><div id="reminderSummary"></div>
+    <div id="weeklyNet">۰ تومان</div><div id="alerts"></div><div id="budgetMini"></div><div id="goalsMini"></div>
+    <div id="recentTransactions"></div><div id="coworkerMini"></div><canvas id="mainChart"></canvas>
+    <div id="totalIncome">۰</div><div id="totalExpense">۰</div><div id="totalSaving">۰</div><div id="totalDebt">۰</div><div id="goalProgress">۰٪</div>
+    <span id="heroSaving">۰</span>
+  </div>
+</section>
+
+<section id="transactions" class="view hidden">
+ <div class="panel"><div class="panel-title"><h3>درآمد و هزینه</h3><button class="add" onclick="openTransaction()">+ ثبت</button></div>
+  <div class="filters"><input id="txSearch" placeholder="جستجو در توضیحات و دسته‌بندی..." oninput="renderTransactions()"><select id="txType" onchange="renderTransactions()"><option value="">همه انواع</option><option value="income">درآمد</option><option value="expense">هزینه</option></select><select id="txCategory" onchange="renderTransactions()"><option value="">همه دسته‌ها</option></select><select id="txMonth" onchange="renderTransactions()"><option value="">همه ماه‌ها</option></select></div>
+  <div id="transactionsList"></div>
+ </div>
+</section>
+
+<section id="debts" class="view hidden">
+ <div class="panel"><div class="panel-title"><div><h3>طلب‌ها و بدهی‌ها</h3><span class="muted">مشتری و همکار در یک مدیریت مالی</span></div><button class="add" onclick="openDebt()">+ مشتری بدهکار</button></div>
+  <div class="filters"><input id="debtSearch" placeholder="نام یا شماره تماس..." oninput="renderDebts()"><select id="debtFilter" onchange="renderDebts()"><option value="">همه</option><option value="open">دارای مانده</option><option value="overdue">عقب‌افتاده</option><option value="paid">تسویه‌شده</option></select></div>
+  <div id="debtsList"></div>
+ </div>
+</section>
+
+<section id="loans" class="view hidden">
+ <div class="panel"><div class="panel-title"><div><h3>🏦 اقساط و وام بانکی</h3><span class="muted">برای هر حساب جداگانه؛ مناسب وام و تسهیلات تمام بانک‌ها</span></div><button class="add" onclick="openLoan()">+ وام / قسط</button></div>
+  <div class="filters"><input id="loanSearch" placeholder="جستجو: بانک، عنوان وام..." oninput="renderLoans()"><select id="loanFilter" onchange="renderLoans()"><option value="">همه</option><option value="open">دارای مانده</option><option value="overdue">قسط عقب‌افتاده</option><option value="done">تسویه‌شده</option></select></div>
+  <div id="loansSummary"></div><div id="loansList"></div>
+ </div>
+</section>
+
+<section id="savings" class="view hidden">
+ <div class="grid"><div class="panel"><div class="panel-title"><h3>اهداف پس‌انداز</h3><button class="add" onclick="openGoal()">+ هدف جدید</button></div><div id="goalsList"></div></div>
+ <div><div class="panel"><div class="panel-title"><h3>ثبت پس‌انداز</h3><button class="add" onclick="openSaving()">+ ثبت</button></div><p class="muted">پس‌انداز از موجودی قابل خرج کم می‌شود.</p><div id="savingSummary"></div></div>
+ <div class="panel"><div class="panel-title"><h3>تاریخچه پس‌انداز</h3></div><div id="savingHistory"></div></div></div></div>
+</section>
+
+<section id="budgets" class="view hidden">
+ <div class="panel"><div class="panel-title"><div><h3>بودجه‌بندی ماهانه</h3><span class="muted">برای هر حساب جداگانه</span></div><button class="add" onclick="openBudget()">+ بودجه</button></div><div id="budgetsList"></div></div>
+</section>
+
+<section id="reports" class="view hidden">
+ <div class="panel"><div class="panel-title"><h3>گزارش مالی</h3><div class="actions"><button onclick="setReport('day')">روزانه</button><button onclick="setReport('month')">ماهانه</button><button onclick="setReport('year')">سالانه</button></div></div><div id="reportSummary"></div><div class="chart" style="height:260px"><canvas id="reportChart"></canvas></div></div>
+ <div class="panel"><div class="panel-title"><h3>ریز گزارش</h3><button class="secondary" onclick="exportCSV()">خروجی CSV</button></div><div id="reportTable"></div></div>
+</section>
+</main>
+</div>
+
+<div id="moreMenu" class="more-menu hidden">
+ <button onclick="showViewFromBottom('debts')">👥 طلب‌ها و بدهی‌ها</button><button onclick="openCoworker();closeMoreNav()">🤝 حساب همکار</button>
+ <button onclick="showViewFromBottom('budgets')">📊 بودجه‌بندی</button>
+ <button onclick="showViewFromBottom('reports')">📈 گزارش‌ها</button>
+ <button onclick="openSettings();closeMoreNav()">⚙️ تنظیمات</button>
+</div>
+<nav class="bottom-nav" id="bottomNav" aria-label="ناوبری اصلی">
+ <button class="active" data-view="dashboard" onclick="showViewFromBottom('dashboard')"><span class="ios-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 10.8 12 3l9 7.8v8.7a1.5 1.5 0 0 1-1.5 1.5h-15A1.5 1.5 0 0 1 3 19.5z"/><path d="M9 21v-6h6v6"/></svg></span>خانه</button>
+ <button data-view="loans" onclick="showViewFromBottom('loans')"><span class="ios-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 10h18M7 15h4"/></svg></span>اقساط</button>
+ <button class="center-action" data-view="quick" onclick="toggleFab()" aria-label="ثبت سریع"><span>+</span></button>
+ <button data-view="reports" onclick="showViewFromBottom('reports')"><span class="ios-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 19h16"/><path d="m7 15 4-5 3 3 5-7"/></svg></span>گزارش</button>
+ <button data-view="settings" onclick="showSettingsFromBottom()"><span class="ios-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img" aria-label="تنظیمات"><path d="M12 15.25a3.25 3.25 0 1 0 0-6.5 3.25 3.25 0 0 0 0 6.5Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.78 1.78-.06-.06A1.7 1.7 0 0 0 16.08 19a1.7 1.7 0 0 0-1.03 1.56v.09h-2.52v-.09A1.7 1.7 0 0 0 11.5 19a1.7 1.7 0 0 0-1.88-.34l-.06.06-1.78-1.78.06-.06A1.7 1.7 0 0 0 8.16 15a1.7 1.7 0 0 0-1.56-1.03h-.09v-2.52h.09A1.7 1.7 0 0 0 8.16 10a1.7 1.7 0 0 0-.34-1.88l-.06-.06 1.78-1.78.06.06A1.7 1.7 0 0 0 11.5 6a1.7 1.7 0 0 0 1.03-1.56v-.09h2.52v.09A1.7 1.7 0 0 0 16.08 6a1.7 1.7 0 0 0 1.88.34l.06-.06 1.78 1.78-.06.06A1.7 1.7 0 0 0 19.4 10a1.7 1.7 0 0 0 1.56 1.03h.09v2.52h-.09A1.7 1.7 0 0 0 19.4 15Z"/></svg></span>تنظیمات</button>
+</nav>
+
+<button class="fab" onclick="toggleFab()" aria-label="ثبت سریع">+</button>
+<div id="fabMenu" class="fab-menu hidden"><button onclick="openTransaction('income');toggleFab()">📈 درآمد</button><button onclick="openTransaction('expense');toggleFab()">📉 هزینه</button><button onclick="openSaving();toggleFab()">💰 پس‌انداز</button><button onclick="openDebt();toggleFab()">👥 بدهکار</button><button onclick="openLoan();toggleFab()">🏦 قسط بانکی</button></div>
+
+<div id="modal" class="modal hidden"><div class="sheet"><div class="sheet-head"><h3 id="modalTitle">ثبت</h3><button class="close" onclick="closeModal()">×</button></div><div id="modalBody"></div></div></div>
+<div id="settingsModal" class="modal hidden"><div class="sheet"><div class="sheet-head"><h3>تنظیمات و پشتیبان‌گیری</h3><button class="close" onclick="closeSettings()">×</button></div>
+ <div class="panel" style="margin:0 0 10px"><h3 style="margin-top:0">امنیت</h3><div class="settings-grid"><button class="setting-btn" onclick="setPin()">🔐 تنظیم / تغییر PIN</button><button class="setting-btn" onclick="lockApp()">🔒 قفل برنامه</button><button class="setting-btn" onclick="togglePrivacy()">👁️ مخفی‌کردن مبالغ</button><button class="setting-btn" onclick="toggleDark()">🌙 حالت تاریک</button></div></div>
+ <div class="panel" style="margin:0 0 10px"><h3 style="margin-top:0">پشتیبان‌گیری</h3><div class="settings-grid"><button class="setting-btn" onclick="exportJSON()">⬇️ Export JSON</button><button class="setting-btn" onclick="importJSON()">⬆️ Import JSON</button><button class="setting-btn" onclick="exportCSV()">📄 Export CSV</button><button class="setting-btn" onclick="exportAll()">📦 خروجی کامل</button></div><p class="note">فایل JSON شامل اطلاعات هر دو حساب است و می‌توانید آن را به گوشی دیگر منتقل و Import کنید. هیچ سرور یا API خارجی استفاده نمی‌شود.</p></div>
+ <div class="panel" style="margin:0 0 10px"><h3 style="margin-top:0">ظاهر</h3><label class="muted">نام حساب‌ها در برنامه</label><div class="form"><input id="personalName" placeholder="حساب شخصی"><input id="shopName" placeholder="حساب مغازه تعمیرات موبایل"><button class="primary" onclick="saveNames()">ذخیره</button></div></div>
+ <div class="panel" style="margin:0 0 10px"><h3 style="margin-top:0">🏦 حساب‌های بانکی</h3><div id="bankAccountsList" class="bank-list"></div><button class="secondary" style="width:100%;margin-top:8px" onclick="openBankAccount()">+ افزودن حساب بانکی</button></div>
+ <div class="panel" style="margin:0 0 10px"><div class="notify-toggle"><div><b>🔔 یادآوری اقساط</b><div class="muted">نمایش هشدار داخل برنامه</div></div><label><input id="reminderToggle" type="checkbox" onchange="toggleReminders(this.checked)"> فعال</label></div></div>
+ <button class="secondary" style="width:100%;margin-bottom:8px" onclick="printPremiumReport()">🖨️ گزارش قابل چاپ / PDF</button>
+ <button class="danger" style="width:100%" onclick="clearAll()">⚠️ حذف تمام اطلاعات این دستگاه</button>
+</div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const KEY='financial-manager-pro-v1';
+const LEGACY='my_finance_manager_v1';
+const DEFAULT_CATS=['مواد غذایی','قبض و اینترنت','حمل‌ونقل','خرید','حقوق','تعمیرات','قطعات موبایل','اجاره','فروش','خدمات','سرمایه‌گذاری','قسط بانکی','سایر'];
+const BANKS=['بانک ملی ایران','بانک ملت','بانک تجارت','بانک صادرات ایران','بانک سپه','بانک رفاه کارگران','بانک مسکن','بانک کشاورزی','بانک توسعه صادرات ایران','بانک توسعه تعاون','پست بانک ایران','بانک صنعت و معدن','بانک کارآفرین','بانک پارسیان','بانک سامان','بانک پاسارگاد','بانک اقتصاد نوین','بانک سینا','بانک شهر','بانک دی','بانک آینده','بانک ایران زمین','بانک گردشگری','بانک خاورمیانه','بانک قرض‌الحسنه مهر ایران','بانک قرض‌الحسنه رسالت','بانک حکمت ایرانیان','بانک انصار','بانک سرمایه','بانک ایران‌زمین','سایر'];
+const $=id=>document.getElementById(id);
+let privacy=false, currentAccount='personal', reportMode='month', fabOpen=false;
+function localISODate(d=new Date()){return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`}
+function localISOMonth(d=new Date()){return `${d.getFullYear()}-${pad2(d.getMonth()+1)}`}
+function today(){return localISODate()}
+function updateTodayJalali(){const d=new Date();const j=g2j(d.getFullYear(),d.getMonth()+1,d.getDate());const names=['یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه'];const m=JMONTHS[j[1]-1];const el=$('todayJalali');if(el)el.textContent=`امروز ${names[d.getDay()]} ${fa(j[2])} ${m} ${fa(j[0])}`;}
+const JMONTHS=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+const JWEEK=['ش','ی','د','س','چ','پ','ج'];
+function pad2(n){return String(n).padStart(2,'0')}
+function g2j(gy,gm,gd){let g_d_m=[0,31,59,90,120,151,181,212,243,273,304,334];let gy2=gm>2?gy+1:gy;let days=355666+365*gy+Math.floor((gy2+3)/4)-Math.floor((gy2+99)/100)+Math.floor((gy2+399)/400)+gd+g_d_m[gm-1];let jy=-1595+33*Math.floor(days/12053);days%=12053;jy+=4*Math.floor(days/1461);days%=1461;if(days>365){jy+=Math.floor((days-1)/365);days=(days-1)%365}let jm=days<186?1+Math.floor(days/31):7+Math.floor((days-186)/30);let jd=1+(days<186?days%31:(days-186)%30);return [jy,jm,jd]}
+function j2g(jy,jm,jd){jy+=1595;let days=-355668+365*jy+Math.floor(jy/33)*8+Math.floor((jy%33+3)/4)+jd+(jm<7?(jm-1)*31:(jm-7)*30+186);let gy=400*Math.floor(days/146097);days%=146097;if(days>36524){gy+=100*Math.floor(--days/36524);days%=36524;if(days>=365)days++}gy+=4*Math.floor(days/1461);days%=1461;if(days>365){gy+=Math.floor((days-1)/365);days=(days-1)%365}let gd=days+1,gm=0,monthDays=[31,(gy%4===0&&gy%100!==0)||gy%400===0?29:28,31,30,31,30,31,31,30,31,30,31];for(let i=0;i<12;i++){if(gd>monthDays[i]){gd-=monthDays[i]}else{gm=i+1;break}}return [gy,gm,gd]}
+function isoToJalali(iso){if(!iso)return '';let [gy,gm,gd]=String(iso).slice(0,10).split('-').map(Number),j=g2j(gy,gm,gd);return `${fa(j[0])}/${fa(pad2(j[1]))}/${fa(pad2(j[2]))}`}
+function cleanJalali(value){return String(value||'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[؛;،,.\-\\|]+/g,'/').replace(/\/{2,}/g,'/').replace(/[^0-9\/]/g,'').replace(/^\/+|\/+$/g,'')}
+function jalaliMonthLength(y,mo){if(mo<=6)return 31;if(mo<=11)return 30;let a=j2g(y,12,1),b=j2g(y+1,1,1);return Math.round((Date.UTC(...b)-Date.UTC(...a))/86400000)}
+function jalaliToIso(value){let v=cleanJalali(value).trim();let m=v.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);if(!m)return '';let y=+m[1],mo=+m[2],d=+m[3];if(y<1300||mo<1||mo>12||d<1||d>jalaliMonthLength(y,mo))return '';let [gy,gm,gd]=j2g(y,mo,d),iso=`${gy}-${pad2(gm)}-${pad2(gd)}`;let back=g2j(gy,gm,gd);return back[0]===y&&back[1]===mo&&back[2]===d?iso:''}
+function readJalali(id){let el=$(id);if(!el)return '';el.value=cleanJalali(el.value);let iso=jalaliToIso(el.value);if(!iso){el.focus();throw new Error('تاریخ شمسی نامعتبر است');}return iso}
+function dateField(id,iso){return `<div class="datefield"><input id="${id}" type="text" inputmode="numeric" autocomplete="off" placeholder="۱۴۰۵/۰۷/۱۴" value="${isoToJalali(iso||today())}" onblur="syncJalali('${id}')" oninput="syncJalali('${id}')"><button type="button" onclick="openJalaliPicker('${id}')">📅</button></div>`}
+function syncJalali(id){let e=$(id);if(!e)return;let cleaned=cleanJalali(e.value);if(e.value!==cleaned)e.value=cleaned;e.classList.toggle('invalid',!!e.value&&!jalaliToIso(e.value))}
+let pickerState={id:'',y:0,m:0};
+function openJalaliPicker(id){let e=$(id),iso=jalaliToIso(e.value)||today(),j=g2j(...iso.split('-').map(Number));pickerState={id:id,y:j[0],m:j[1]};renderJalaliPicker(j[0],j[1]);}
+function renderJalaliPicker(y,m){let p=document.getElementById('jpicker');if(!p){p=document.createElement('div');p.id='jpicker';p.className='jpicker';document.body.appendChild(p)}pickerState.y=y;pickerState.m=m;let days=jalaliMonthLength(y,m);let first=j2g(y,m,1),dow=(new Date(first[0],first[1]-1,first[2]).getDay()+1)%7;let html=`<div class="jpicker-head"><button type="button" onclick="moveJMonth(-1)">‹</button><div class="jpicker-title">${fa(y)} ${JMONTHS[m-1]}</div><button type="button" onclick="moveJMonth(1)">›</button></div><div class="jpicker-week">${JWEEK.map(x=>`<span>${x}</span>`).join('')}</div><div class="jpicker-days">`;for(let i=0;i<dow;i++)html+='<button type="button" class="jday empty"></button>';for(let d=1;d<=days;d++)html+=`<button type="button" class="jday" onclick="pickJDay(${y},${m},${d})">${fa(d)}</button>`;html+='</div>';p.innerHTML=html;let e=$(pickerState.id),r=e.getBoundingClientRect();p.style.top=Math.min(window.innerHeight-350,Math.max(10,r.bottom+6))+'px';p.style.left=Math.min(window.innerWidth-p.offsetWidth-10,Math.max(10,r.left))+'px'}
+function moveJMonth(delta){let y=pickerState.y,m=pickerState.m+delta;if(m<1){m=12;y--}if(m>12){m=1;y++}renderJalaliPicker(y,m)}
+function pickJDay(y,m,d){let [gy,gm,gd]=j2g(y,m,d);let iso=`${gy}-${pad2(gm)}-${pad2(gd)}`;let e=$(pickerState.id);e.value=`${fa(y)}/${fa(pad2(m))}/${fa(pad2(d))}`;e.classList.remove('invalid');e.dataset.iso=iso;document.getElementById('jpicker')?.remove()}
+document.addEventListener('click',e=>{let p=document.getElementById('jpicker');if(p&&!p.contains(e.target)&&!e.target.closest('.datefield'))p.remove()});
+const num=v=>Number(String(v??0).replace(/,/g,'').replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)))||0;
+const fa=n=>Number(n||0).toLocaleString('fa-IR');
+const money=n=>privacy?'••••••':fa(n)+' تومان';
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+function load(){
+ let raw=localStorage.getItem(KEY);
+ if(raw){try{return JSON.parse(raw)}catch{}}
+ let base={version:1,settings:{personalName:'حساب شخصی',shopName:'حساب مغازه تعمیرات موبایل',dark:false,pin:''},accounts:{personal:{transactions:[],debts:[],savings:[],goals:[],budgets:[],loans:[]},shop:{transactions:[],debts:[],savings:[],goals:[],budgets:[],loans:[]}}};
+ let legacy=localStorage.getItem(LEGACY);
+ if(legacy)try{
+  let l=JSON.parse(legacy), a=base.accounts.personal;
+  (l.finance||[]).forEach(x=>a.transactions.push({id:x.id||uid(),type:x.type==='income'?'income':'expense',amount:num(x.amount),date:x.date||today(),note:x.note||'',category:'سایر'}));
+  (l.savings||[]).forEach(x=>a.savings.push({id:x.id||uid(),amount:num(x.amount),date:x.date||today(),note:x.note||'',goalId:''}));
+  if(num(l.savingGoal))a.goals.push({id:uid(),name:'هدف قبلی',target:num(l.savingGoal),created:today()});
+ }catch{}
+ return base;
+}
+let data=load();
+function normalizeData(){Object.values(data.accounts).forEach(a=>{a.transactions=a.transactions||[];a.debts=a.debts||[];a.coworkers=a.coworkers||[];a.savings=a.savings||[];a.goals=a.goals||[];a.budgets=a.budgets||[];a.loans=a.loans||[];a.loans.forEach(l=>{l.payments=l.payments||[];l.totalPayable=num(l.totalPayable||l.total||0);l.installment=num(l.installment||0);l.count=num(l.count||0);l.due=l.due||today();});});data.settings=data.settings||{personalName:'حساب شخصی',shopName:'حساب مغازه تعمیرات موبایل',dark:false,pin:'',reminders:true,bankAccounts:[]};data.settings.bankAccounts=data.settings.bankAccounts||[];data.settings.reminders=data.settings.reminders!==false;if(!data.settings.unified){const p=data.accounts.personal,s=data.accounts.shop;for(const k of ['transactions','debts','coworkers','savings','goals','budgets','loans']){p[k]=(p[k]||[]).concat(s[k]||[])}data.settings.unified=true;data.settings.unifiedAt=today();}data.accounts.shop={transactions:[],debts:[],coworkers:[],savings:[],goals:[],budgets:[],loans:[]};currentAccount='personal';}
+normalizeData();
+function save(){normalizeData();localStorage.setItem(KEY,JSON.stringify(data));renderAll()}
+function active(){return data.accounts.personal}
+function switchAccount(a){currentAccount=a;document.querySelectorAll('#accountBar button').forEach(b=>b.classList.toggle('active',b.dataset.account===a));renderAll();toast(a==='shop'?'حساب مغازه فعال شد':'حساب شخصی فعال شد')}
+function monthKey(d){return (d||'').slice(0,7)}
+function currentMonth(){return today().slice(0,7)}
+function currentJMonth(){let j=g2j(...today().split('-').map(Number));return `${j[0]}-${pad2(j[1])}`}
+function formatJMonth(m){if(!m)return '';let [y,mo]=m.split('-').map(Number);if(y>1500){let j=g2j(y,mo,1);y=j[0];mo=j[1]}return `${fa(y)} ${JMONTHS[mo-1]||''}`}
+function monthName(){return new Date().toLocaleDateString('fa-IR',{month:'long',year:'numeric'})}
+function formatDate(d){if(!d)return 'بدون تاریخ';try{return isoToJalali(d)}catch{return d}}
+function jalaliParts(date){let d=date||new Date(),fmt=new Intl.DateTimeFormat('fa-IR-u-ca-persian',{year:'numeric',month:'2-digit',day:'2-digit'});return fmt.format(d)}
+function toast(t){$('toast').textContent=t;$('toast').classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>$('toast').classList.remove('show'),1800)}
+function totals(a=active(), month=null){
+ let tx=a.transactions||[];if(month)tx=tx.filter(x=>monthKey(x.date)===month);
+ let income=tx.filter(x=>x.type==='income').reduce((s,x)=>s+num(x.amount),0),expense=tx.filter(x=>x.type==='expense').reduce((s,x)=>s+num(x.amount),0);
+ let saving=(a.savings||[]).reduce((s,x)=>s+num(x.amount),0);
+ let debt=(a.debts||[]).reduce((s,x)=>s+Math.max(0,num(x.total)-num(x.paid)),0);
+ return {income,expense,saving,balance:income-expense-saving,debt};
+}
+function renderAll(){renderDashboard();renderCoworkerMini();renderTransactions();renderDebts();renderLoans();renderSavings();renderBudgets();renderReports();renderMonthlySummary();renderSmartAnalysis();renderCalendar();renderReminderSummary();renderBankAccounts();$('monthName').textContent=monthName();$('accountName').textContent='حساب یکپارچه شخصی + مغازه';if($('reminderToggle'))$('reminderToggle').checked=data.settings.reminders!==false}
+function bankIcon(name='بانک'){let n=String(name);let key=n.replace(/^بانک\s*/,'').replace(/ایران/g,'').trim();let map={'ملی':'مل','ملت':'مل','تجارت':'تج','صادرات':'صا','سپه':'سپ','رفاه کارگران':'رف','مسکن':'مس','کشاورزی':'کش','پارسیان':'پا','سامان':'سا','پاسارگاد':'پ','اقتصاد نوین':'ا','سینا':'س','شهر':'ش','دی':'دی','آینده':'آی','ایران زمین':'ایز','گردشگری':'گ','خاورمیانه':'خا','مهر ایران':'مه','رسالت':'رس'};let t=map[key]||key.slice(0,2)||'بان';return `<span class="bank-badge" title="${esc(name)}"><small>${esc(t)}</small></span>`}
+function renderLoanWidget(){let box=$('loanWidget');if(!box)return;let a=active(),loans=(a.loans||[]).filter(l=>loanRemaining(l)>0);let remaining=loans.reduce((s,l)=>s+loanRemaining(l),0);let next=loans.slice().sort((x,y)=>(loanNextDate(x)||x.due).localeCompare(loanNextDate(y)||y.due))[0];if(!loans.length){box.innerHTML=`<div class="loan-widget"><div class="loan-widget-head"><div class="loan-widget-title"><div class="bank-badge"><small>+</small></div><div><b>اقساط و وام</b><div class="muted">هنوز وام فعالی ثبت نشده</div></div></div></div><div class="loan-widget-actions"><button class="primary" onclick="openLoan()">+ ثبت وام / قسط</button><button class="secondary" onclick="openLoansView()">مشاهده اقساط</button></div></div>`;return}let nextAmount=Math.min(num(next.installment),loanRemaining(next)),nextDate=loanNextDate(next)||next.due,overdue=nextDate&&nextDate<today();box.innerHTML=`<div class="loan-widget"><div class="loan-widget-head"><div class="loan-widget-title">${bankIcon(next.bank||'بانک')}<div><b>اقساط و وام</b><div class="muted">${fa(loans.length)} وام فعال</div></div></div><button class="secondary" onclick="openLoansView()">همه اقساط</button></div><div class="loan-widget-grid"><div class="loan-widget-stat"><b>${money(remaining)}</b><span>مانده کل</span></div><div class="loan-widget-stat"><b>${money(nextAmount)}</b><span>قسط بعدی</span></div><div class="loan-widget-stat"><b class="${overdue?'negative':''}">${formatDate(nextDate)}</b><span>${overdue?'سررسید گذشته':'سررسید بعدی'}</span></div></div><div class="loan-widget-next"><span>${esc(next.bank||'بانک')} — ${esc(next.title||'وام')}</span><span class="smart-status ${overdue?'bad':'ok'}">${overdue?'⚠ عقب‌افتاده':'✓ سررسید بعدی'}</span></div><div class="loan-widget-actions"><button class="primary" onclick="addLoanPayment('${next.id}')">💵 ثبت پرداخت</button><button class="secondary" onclick="openLoan('${next.id}')">✏️ مدیریت وام</button></div></div>`}
+
+function renderDashboard(){
+ let a=active(), t=totals(a), m=totals(a,currentMonth());
+ $('spendable').textContent=money(t.balance);$('heroIncome').textContent=money(m.income);$('heroExpense').textContent=money(m.expense);$('heroSaving').textContent=money(t.saving);$('heroDebt').textContent=money(t.debt);$('heroLoanDebt').textContent=money((a.loans||[]).reduce((s,l)=>s+loanRemaining(l),0));
+ renderLoanWidget();
+ $('totalIncome').textContent=money(t.income);$('totalExpense').textContent=money(t.expense);$('totalSaving').textContent=money(t.saving);$('totalDebt').textContent=money(t.debt);
+ let goals=a.goals||[], gp=goals.length?goals.reduce((s,g)=>s+Math.min(100,(num(g.saved||0)/Math.max(1,num(g.target)))*100),0)/goals.length:0;$('goalProgress').textContent=fa(Math.round(gp))+'٪';
+ let recent=[...(a.transactions||[])].sort((x,y)=>y.date.localeCompare(x.date)).slice(0,7);$('recentTransactions').innerHTML=recent.length?recent.map(txHTML).join(''):'<div class="empty">هنوز تراکنشی ثبت نشده است.</div>';
+ let alerts=[];(a.debts||[]).filter(d=>remaining(d)>0&&d.due&&d.due<today()).forEach(d=>alerts.push(`<div class="alert red">⏰ بدهی مشتری <b>${esc(d.name)}</b> عقب افتاده است: ${money(remaining(d))}</div>`));
+ (a.budgets||[]).filter(b=>b.month===currentMonth()).forEach(b=>{let used=spentCat(b.category,currentMonth());if(num(b.limit)>0&&used/num(b.limit)>=.8)alerts.push(`<div class="alert">⚠️ بودجه «${esc(b.category)}» ${fa(Math.round(used/num(b.limit)*100))}٪ مصرف شده است.</div>`)});
+ (a.loans||[]).forEach(l=>{let r=loanRemaining(l),due=l.due;if(r>0&&due<today())alerts.push(`<div class="alert red">🏦 قسط بانکی «${esc(l.title||l.bank)}» عقب افتاده است.</div>`);else if(r>0&&due&&Math.ceil((new Date(due)-new Date(today()))/86400000)<=7)alerts.push(`<div class="alert">🏦 قسط «${esc(l.title||l.bank)}» نزدیک است: ${formatDate(due)}</div>`)});
+ if(!alerts.length)alerts.push('<div class="alert green">✓ هشدار مهمی وجود ندارد.</div>');$('alerts').innerHTML=alerts.slice(0,6).join('');
+ $('budgetMini').innerHTML=budgetHTML((a.budgets||[]).filter(b=>b.month===currentMonth()).slice(0,4));$('goalsMini').innerHTML=goalHTML(goals.slice(0,4));drawMainChart();
+;renderWeeklyPremium();renderBalanceDelta();}
+function txHTML(x){let c=x.type==='income'?'#16a34a':'#dc2626',sg=x.type==='income'?'+':'−';return `<div class="item"><div class="item-main"><span class="dot" style="background:${c}"></span><div><b>${x.type==='income'?'📈':'📉'} ${esc(x.note||x.category||'تراکنش')}</b><small>${formatDate(x.date)} • ${esc(x.category||'سایر')}</small></div></div><div style="text-align:left"><div class="money ${x.type==='income'?'success':'negative'}">${sg}${money(x.amount)}</div><button class="secondary" style="padding:4px 7px;font-size:9px;margin-top:4px" onclick="editTransaction('${x.id}')">ویرایش</button><button class="danger" style="padding:4px 7px;font-size:9px;margin-top:4px;margin-right:4px" onclick="deleteTransaction('${x.id}')">حذف</button></div></div>`}
+function previousMonthKey(){let d=new Date();d.setDate(1);d.setMonth(d.getMonth()-1);return localISOMonth(d)}
+function renderMonthlySummary(){let a=active(),m=totals(a,currentMonth()),p=totals(a,previousMonthKey()),delta=m.income-m.expense-(p.income-p.expense),pct=p.income-p.expense?Math.round(Math.abs(delta)/Math.abs(p.income-p.expense)*100):0;let chip=$('monthTrendChip');if(chip){chip.textContent=delta>=0?'▲ '+fa(pct)+'٪ بهتر':'▼ '+fa(pct)+'٪ ضعیف‌تر';chip.style.color=delta>=0?'#16a34a':'#dc2626'}$('monthlySummary').innerHTML=`<div class="smart-row"><span>درآمد</span><b>${money(m.income)}</b></div><div class="smart-row"><span>هزینه</span><b>${money(m.expense)}</b></div><div class="smart-row"><span>اقساط پرداختی</span><b>${money((a.transactions||[]).filter(x=>x.category==='قسط بانکی'&&monthKey(x.date)===currentMonth()).reduce((s,x)=>s+num(x.amount),0))}</b></div><div class="smart-row"><span>خالص ماه</span><b class="${m.income-m.expense>=0?'smart-positive':'smart-negative'}">${money(m.income-m.expense)}</b></div>`}
+function renderSmartAnalysis(){let a=active(),m=totals(a,currentMonth()),tx=(a.transactions||[]).filter(x=>monthKey(x.date)===currentMonth()&&x.type==='expense'),cats={};tx.forEach(x=>cats[x.category]=(cats[x.category]||0)+num(x.amount));let top=Object.entries(cats).sort((a,b)=>b[1]-a[1])[0],loan=(a.loans||[]).filter(l=>loanRemaining(l)>0).reduce((s,l)=>s+loanRemaining(l),0),messages=[];if(top)messages.push(`بیشترین هزینه این ماه مربوط به «${esc(top[0])}» با ${money(top[1])} است.`);if(m.expense>m.income)messages.push('هزینه‌های این ماه از درآمد بیشتر شده؛ بهتر است بودجه‌بندی را بررسی کنی.');else messages.push('خالص جریان این ماه مثبت است؛ وضعیت درآمد و هزینه متعادل است.');if(loan)messages.push(`مانده وام‌های فعال: ${money(loan)}.`);$('smartAnalysis').innerHTML=messages.map((x,i)=>`<div class="smart-row"><span>${i===0?'💡':i===1?'📌':'🏦'}</span><b style="font-size:10px;line-height:1.8">${x}</b></div>`).join('')}
+function renderCalendar(){let box=$('financialCalendar');if(!box)return;let d=new Date(),j=g2j(d.getFullYear(),d.getMonth()+1,d.getDate()),jy=j[0],jm=j[1],jd=j[2],first=j2g(jy,jm,1),next=jm===12?j2g(jy+1,1,1):j2g(jy,jm+1,1),start=new Date(first[0],first[1]-1,first[2]),end=new Date(next[0],next[1]-1,next[2]),days=Math.round((end-start)/86400000),week=(start.getDay()+1)%7,events={};(active().loans||[]).forEach(l=>{let x=loanNextDate(l)||l.due;if(x)events[x]=(events[x]||[]).concat(['loan'])});(active().debts||[]).forEach(x=>{if(x.due)events[x.due]=(events[x.due]||[]).concat(['debt'])});let cells=JWEEK.map(x=>`<div class="head">${x}</div>`).join('');for(let i=0;i<week;i++)cells+='<div></div>';for(let day=1;day<=days;day++){let gd=new Date(start);gd.setDate(start.getDate()+day-1);let iso=glocalISODate(d),cls=day===jd?'today':'';if(events[iso]?.length)cls+=' has-event';if(events[iso]?.includes('loan')&&iso<today())cls+=' event-overdue';cells+=`<div class="${cls}" title="${events[iso]?.length?'دارای سررسید':''}">${fa(day)}</div>`}box.innerHTML=`<div style="font-weight:800;font-size:12px">${JMONTHS[jm-1]} ${fa(jy)}</div><div class="calendar">${cells}</div><div class="muted" style="margin-top:8px">● آبی: سررسید • قرمز: عقب‌افتاده</div>`}
+function renderReminderSummary(){let box=$('reminderSummary');if(!box)return;let a=active(),items=[];(a.loans||[]).forEach(l=>{let d=loanNextDate(l)||l.due;if(loanRemaining(l)&&d&&Math.ceil((new Date(d)-new Date(today()))/86400000)<=7)items.push(`قسط «${esc(l.title||l.bank)}» — ${formatDate(d)}`)});(a.debts||[]).forEach(x=>{if(remaining(x)&&x.due&&x.due<=today())items.push(`طلب «${esc(x.name)}» — ${formatDate(x.due)}`)});box.innerHTML=data.settings.reminders?(items.length?items.slice(0,4).map(x=>`<div class="alert">🔔 ${x}</div>`).join(''):'<div class="alert green">✓ موردی برای یادآوری نزدیک نیست.</div>'):'<div class="alert">یادآوری‌ها خاموش هستند.</div>'}
+function toggleReminders(v){data.settings.reminders=!!v;save();toast(v?'یادآوری‌ها فعال شد':'یادآوری‌ها خاموش شد')}
+function renderBankAccounts(){let box=$('bankAccountsList');if(!box)return;let arr=data.settings.bankAccounts||[];box.innerHTML=arr.length?arr.map(b=>`<div class="bank-row"><div class="bank-row-main">${bankIcon(b.bank)}<div><b>${esc(b.title||b.bank)}</b><div class="muted">${esc(b.last4?'**** '+b.last4:'بدون شماره کارت')}</div></div></div><div><div class="bank-balance">${money(b.balance)}</div><button class="secondary" onclick="deleteBankAccount('${b.id}')">حذف</button></div></div>`).join(''):'<div class="empty">هنوز حساب بانکی اضافه نشده است.</div>'}
+function openBankAccount(){openModal('افزودن حساب بانکی',`<form class="form" onsubmit="saveBankAccount(event)"><label>بانک</label><select id="baBank">${BANKS.map(x=>`<option>${esc(x)}</option>`).join('')}</select><label>عنوان حساب</label><input id="baTitle" placeholder="مثلاً حساب اصلی"><div class="row"><div><label>۴ رقم آخر کارت</label><input id="baLast4" inputmode="numeric" maxlength="4"></div><div><label>موجودی</label><input id="baBalance" inputmode="numeric" value="0"></div></div><button class="primary">ذخیره حساب</button></form>`)}
+function saveBankAccount(e){e.preventDefault();data.settings.bankAccounts=data.settings.bankAccounts||[];data.settings.bankAccounts.push({id:uid(),bank:$('baBank').value,title:$('baTitle').value.trim()||$('baBank').value,last4:$('baLast4').value.replace(/\D/g,''),balance:num($('baBalance').value)});save();closeModal();toast('حساب بانکی اضافه شد')}
+function deleteBankAccount(id){data.settings.bankAccounts=(data.settings.bankAccounts||[]).filter(x=>x.id!==id);save();toast('حساب بانکی حذف شد')}
+function globalSearch(q){let box=$('searchResults');q=(q||'').trim().toLowerCase();if(!q){box.classList.add('hidden');return}let a=active(),res=[];(a.transactions||[]).forEach(x=>{if(`${x.note} ${x.category}`.toLowerCase().includes(q))res.push({t:'تراکنش',title:x.note||x.category,sub:`${formatDate(x.date)} • ${money(x.amount)}`,view:'transactions'})});(a.loans||[]).forEach(x=>{if(`${x.bank} ${x.title}`.toLowerCase().includes(q))res.push({t:'قسط',title:x.title,sub:`${x.bank} • ${money(loanRemaining(x))}`,view:'loans'})});(a.debts||[]).forEach(x=>{if(`${x.name} ${x.phone}`.toLowerCase().includes(q))res.push({t:'طلب',title:x.name,sub:`${money(remaining(x))}`,view:'debts'})});box.innerHTML=res.length?res.slice(0,10).map(x=>`<div class="search-result" onclick="showViewFromBottom('${x.view}');clearGlobalSearch()"><b>${esc(x.title)}</b><small>${esc(x.t)} • ${esc(x.sub)}</small></div>`).join(''):'<div class="empty">نتیجه‌ای پیدا نشد.</div>';box.classList.remove('hidden')}
+function clearGlobalSearch(){$('globalSearch').value='';$('searchResults').classList.add('hidden')}
+function printPremiumReport(){let w=window.open('','_blank');if(!w){toast('اجازه باز شدن پنجره گزارش را بده');return}let a=active(),m=totals(a,currentMonth());w.document.write(`<html dir="rtl"><head><meta charset="utf-8"><title>گزارش حسابینو</title><style>body{font-family:Tahoma;padding:35px;line-height:2}h1{color:#0879eb}table{width:100%;border-collapse:collapse}td,th{border:1px solid #ddd;padding:8px}.premium-search{display:none!important}
+.premium-search{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important;border:0!important}
+</style>
+<style>
+/* v18 • bottom tab bar matched to reference */
+.bottom-nav{
+  z-index:200!important;
+  width:min(680px,calc(100vw - 22px))!important;
+  height:74px!important;
+  padding:6px!important;
+  bottom:calc(15px + env(safe-area-inset-bottom))!important;
+  border-radius:30px!important;
+  background:rgba(247,252,255,.78)!important;
+  border:1px solid rgba(255,255,255,.96)!important;
+  box-shadow:0 14px 42px rgba(21,91,139,.20),inset 0 1px 0 rgba(255,255,255,.98)!important;
+  backdrop-filter:blur(30px) saturate(175%)!important;
+  -webkit-backdrop-filter:blur(30px) saturate(175%)!important;
+  direction:rtl!important;
+  grid-template-columns:1fr 1fr 1.05fr 1fr 1fr!important;
+  gap:3px!important;
+}
+.bottom-nav:before{
+  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(110deg,rgba(255,255,255,.38),rgba(255,255,255,0) 45%,rgba(93,196,255,.08))!important;
+}
+.bottom-nav button:not(.center-action){
+  min-height:60px!important;
+  border-radius:23px!important;
+  color:#315b7b!important;
+  font-size:9px!important;
+  font-weight:700!important;
+  gap:3px!important;
+  position:relative;
+  z-index:2;
+}
+.bottom-nav button:not(.center-action) .ios-icon{
+  width:34px!important;height:34px!important;
+}
+.bottom-nav button:not(.center-action) .ios-icon svg{
+  width:28px!important;height:28px!important;
+  stroke-width:1.75!important;
+}
+.bottom-nav button.active{
+  color:#087ff5!important;
+  background:rgba(10,132,255,.12)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.72)!important;
+}
+.bottom-nav button.active:after{
+  width:5px!important;height:5px!important;
+  bottom:4px!important;
+  background:#0a84ff!important;
+  box-shadow:0 0 10px rgba(10,132,255,.65)!important;
+}
+.bottom-nav .center-action{
+  position:relative!important;
+  z-index:5!important;
+  width:62px!important;height:62px!important;
+  min-height:62px!important;
+  justify-self:center!important;align-self:center!important;
+  border-radius:50%!important;
+  transform:translateY(-18px)!important;
+  border:3px solid rgba(255,255,255,.92)!important;
+  background:linear-gradient(145deg,#087ff5 0%,#168fff 52%,#5ac8fa 100%)!important;
+  color:#fff!important;
+  box-shadow:0 10px 25px rgba(10,132,255,.34),0 0 0 1px rgba(10,132,255,.10),inset 0 1px 0 rgba(255,255,255,.55)!important;
+}
+.bottom-nav .center-action:before{
+  content:"";position:absolute;inset:5px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.22);pointer-events:none;
+}
+.bottom-nav .center-action span{
+  font-size:34px!important;line-height:1!important;font-weight:300!important;
+  color:#fff!important;transform:translateY(-1px);
+}
+.bottom-nav .center-action:after{display:none!important}
+.bottom-nav .center-action:active{transform:translateY(-18px) scale(.92)!important}
+@media(max-width:600px){
+  .bottom-nav{width:calc(100vw - 18px)!important;height:74px!important;bottom:calc(14px + env(safe-area-inset-bottom))!important;border-radius:29px!important}
+  .bottom-nav button:not(.center-action){min-height:58px!important;font-size:9px!important}
+  .bottom-nav button:not(.center-action) .ios-icon{width:34px!important;height:34px!important}
+  .bottom-nav button:not(.center-action) .ios-icon svg{width:28px!important;height:28px!important}
+  .bottom-nav .center-action{width:60px!important;height:60px!important;min-height:60px!important;transform:translateY(-18px)!important}
+  .bottom-nav .center-action:active{transform:translateY(-18px) scale(.92)!important}
+  .bottom-nav .center-action span{font-size:33px!important}
+}
+
+/* حسابینو v19 stability */
+html,body{overflow-x:hidden!important}.view{animation:none!important}header{position:relative!important;top:auto!important;border-bottom:0!important}header:before,header:after{display:none!important}body.dark{color:#eaf4ff!important;background:radial-gradient(circle at 50% -10%,rgba(10,132,255,.20),transparent 32%),radial-gradient(circle at 4% 48%,rgba(10,132,255,.09),transparent 28%),#071522!important}body.dark header{background:rgba(7,21,34,.82)!important;border-bottom:0!important;box-shadow:none!important}body.dark .iconbtn,body.dark .stat,body.dark .home-action,body.dark .panel,body.dark .loan-widget,body.dark .loan-card,body.dark .debt-card,body.dark .goal{background:rgba(11,31,49,.76)!important;border-color:rgba(255,255,255,.10)!important;color:#eaf4ff!important}body.dark .form input,body.dark .form select,body.dark .form textarea,body.dark .filters input,body.dark .filters select{background:rgba(4,16,28,.82)!important;color:#eef7ff!important;border-color:rgba(255,255,255,.12)!important}body.dark .modal{background:rgba(0,8,16,.78)!important}body.dark .sheet{background:#0a1a2a!important;border-color:rgba(255,255,255,.10)!important;color:#eef7ff!important}body.dark .jpicker{background:#0a1a2a!important;border-color:rgba(255,255,255,.12)!important;color:#eef7ff!important}body.dark .jpicker-head button{background:rgba(255,255,255,.07)!important}body.dark .more-menu,body.dark .fab-menu{background:rgba(8,25,41,.94)!important;border-color:rgba(255,255,255,.12)!important}body.dark .fab-menu button,body.dark .more-menu button{background:rgba(255,255,255,.06)!important;border-color:rgba(255,255,255,.10)!important;color:#eef7ff!important}body.dark .bottom-nav{background:rgba(8,25,41,.90)!important;border-color:rgba(255,255,255,.12)!important}body.dark .bottom-nav button:not(.center-action){color:#b9cce0!important}body.dark .bottom-nav button.active{color:#5ab4ff!important;background:rgba(10,132,255,.16)!important}.datefield input.invalid{border-color:#ef4444!important;box-shadow:0 0 0 2px rgba(239,68,68,.10)}
+</style>
+</head><body><h1>گزارش مالی حسابینو</h1><p>${monthName()}</p><table><tr><th>شاخص</th><th>مبلغ</th></tr><tr><td>درآمد ماه</td><td>${money(m.income)}</td></tr><tr><td>هزینه ماه</td><td>${money(m.expense)}</td></tr><tr><td>پس‌انداز</td><td>${money(m.saving)}</td></tr><tr><td>خالص</td><td>${money(m.income-m.expense)}</td></tr></table><p>این گزارش روی دستگاه کاربر تولید شده است.</p><script>window.print()<\/script></body></html>`);w.document.close()}
+function openModal(title,body){$('modalTitle').textContent=title;$('modalBody').innerHTML=body;$('modal').classList.remove('hidden')}
+function closeModal(){$('modal').classList.add('hidden')}
+function openTransaction(type='expense',id=''){let x=active().transactions.find(t=>t.id===id);openModal(x?'ویرایش تراکنش':'تراکنش جدید',`<form class="form" onsubmit="saveTransaction(event,'${id}')"><div class="row"><div><label>نوع</label><select id="fType"><option value="income" ${(!x&&type==='income')||x?.type==='income'?'selected':''}>درآمد</option><option value="expense" ${(!x&&type==='expense')||x?.type==='expense'?'selected':''}>هزینه</option></select></div><div><label>مبلغ (تومان)</label><input id="fAmount" inputmode="numeric" required value="${x?.amount||''}"></div></div><div class="row"><div><label>تاریخ</label>${dateField("fDate",x?.date||today())}<small class="muted">تاریخ را به صورت شمسی وارد کنید.</small></div><div><label>دسته‌بندی</label><select id="fCat">${DEFAULT_CATS.map(c=>`<option ${x?.category===c?'selected':''}>${c}</option>`).join('')}</select></div></div><div><label>توضیحات</label><textarea id="fNote" placeholder="مثلاً فروش گوشی، خرید قطعه...">${esc(x?.note||'')}</textarea></div><div class="row"><button class="primary">ذخیره</button><button type="button" class="secondary" onclick="closeModal()">انصراف</button></div></form>`)}
+function saveTransaction(e,id){e.preventDefault();try{let a=active(),old=a.transactions.find(x=>x.id===id),x={id:id||uid(),type:$('fType').value,amount:num($('fAmount').value),date:readJalali('fDate'),note:$('fNote').value.trim(),category:$('fCat').value};if(!x.amount)return;old?Object.assign(old,x):a.transactions.push(x);save();closeModal();toast('تراکنش ذخیره شد')}catch(err){toast(err.message||'تاریخ را بررسی کنید')}}
+function editTransaction(id){openTransaction('',id)}
+function deleteTransaction(id){if(confirm('این تراکنش حذف شود؟')){active().transactions=active().transactions.filter(x=>x.id!==id);save();toast('حذف شد')}}
+function renderTransactions(){let a=active(),q=($('txSearch')?.value||'').trim().toLowerCase(),type=$('txType')?.value||'',cat=$('txCategory')?.value||'',mo=$('txMonth')?.value||'';if($('txCategory'))$('txCategory').innerHTML='<option value="">همه دسته‌ها</option>'+[...new Set(a.transactions.map(x=>x.category).filter(Boolean))].map(c=>`<option ${cat===c?'selected':''}>${esc(c)}</option>`).join('');if($('txMonth'))$('txMonth').innerHTML='<option value="">همه ماه‌ها</option>'+[...new Set(a.transactions.map(x=>monthKey(x.date)).filter(Boolean))].sort().reverse().map(m=>`<option value="${m}" ${mo===m?'selected':''}>${m}</option>`).join('');let arr=[...a.transactions].filter(x=>(!q||(`${x.note} ${x.category}`).toLowerCase().includes(q))&&(!type||x.type===type)&&(!cat||x.category===cat)&&(!mo||monthKey(x.date)===mo)).sort((x,y)=>y.date.localeCompare(x.date));$('transactionsList').innerHTML=arr.length?`<div class="list">${arr.map(x=>`<div class="item">${txHTML(x).replace('</div></div>','')}</div>`).join('')}`:'<div class="empty">موردی پیدا نشد.</div>'}
+function remaining(d){return Math.max(0,num(d.total)-num(d.paid))}
+function openDebt(id=''){let x=active().debts.find(d=>d.id===id);openModal(x?'ویرایش بدهی':'ثبت بدهکار',`<form class="form" onsubmit="saveDebt(event,'${id}')"><div class="row"><div><label>نام مشتری</label><input id="dName" required value="${esc(x?.name||'')}"></div><div><label>شماره تماس</label><input id="dPhone" inputmode="tel" value="${esc(x?.phone||'')}"></div></div><div class="row"><div><label>مبلغ کل</label><input id="dTotal" inputmode="numeric" required value="${x?.total||''}"></div><div><label>پرداخت‌شده</label><input id="dPaid" inputmode="numeric" value="${x?.paid||0}"></div></div><div><label>تاریخ سررسید</label>${dateField("dDue",x?.due||today())}</div><div><label>توضیحات</label><textarea id="dNote">${esc(x?.note||'')}</textarea></div><button class="primary">ذخیره بدهی</button></form>`)}
+function saveDebt(e,id){e.preventDefault();try{let a=active(),x={id:id||uid(),name:$('dName').value.trim(),phone:$('dPhone').value.trim(),total:num($('dTotal').value),paid:num($('dPaid').value),due:readJalali('dDue'),note:$('dNote').value.trim()};if(!x.name||!x.total)return;let old=a.debts.find(d=>d.id===id);old?Object.assign(old,x):a.debts.push(x);save();closeModal();toast('بدهی ذخیره شد')}catch(err){toast(err.message||'تاریخ را بررسی کنید')}}
+function addPayment(id){let d=active().debts.find(x=>x.id===id);if(!d)return;let v=prompt(`مبلغ پرداختی برای ${d.name} را وارد کنید:`,remaining(d));if(v!==null){let p=num(v);if(p>0){d.paid=Math.min(d.total,d.paid+p);save();toast('پرداخت ثبت شد')}}}
+function deleteDebt(id){if(confirm('این بدهی حذف شود؟')){active().debts=active().debts.filter(x=>x.id!==id);save()}}
+function renderDebts(){let a=active(),q=($('debtSearch')?.value||'').toLowerCase(),f=$('debtFilter')?.value||'',arr=a.debts.filter(d=>{let r=remaining(d),ov=r>0&&d.due&&d.due<today();return(!q||(`${d.name} ${d.phone}`).toLowerCase().includes(q))&&(!f||(f==='open'&&r>0)||(f==='paid'&&!r)||(f==='overdue'&&ov))}).sort((x,y)=>y.due.localeCompare(x.due));$('debtsList').innerHTML=arr.length?arr.map(d=>{let r=remaining(d),ov=r>0&&d.due<today(),pct=Math.min(100,d.paid/Math.max(1,d.total)*100);return `<div class="debt-card"><div class="debt-head"><strong>👤 ${esc(d.name)}</strong><b class="${r?'negative':'success'}">${money(r)}</b></div><div class="debt-meta"><span>📞 ${esc(d.phone||'بدون شماره')}</span><span>کل: ${money(d.total)}</span><span>پرداخت: ${money(d.paid)}</span><span class="${ov?'negative':''}">سررسید: ${formatDate(d.due)}</span></div><div class="progress"><i style="width:${pct}%"></i></div><div class="actions" style="margin-top:9px">${r?`<button onclick="addPayment('${d.id}')">💵 ثبت پرداخت</button>`:''}<button onclick="openDebt('${d.id}')">✏️ ویرایش</button><button onclick="deleteDebt('${d.id}')">🗑️ حذف</button></div></div>`}).join(''):'<div class="empty">بدهکاری ثبت نشده است.</div>'}
+function coworkerRemaining(x){return Math.max(0,num(x.total)-num(x.paid))}
+function openCoworker(id=''){let x=active().coworkers.find(c=>c.id===id);openModal(x?'ویرایش همکار':'ثبت حساب همکار',`<form class="form" onsubmit="saveCoworker(event,'${id}')"><div class="row"><div><label>نام همکار</label><input id="cName" required value="${esc(x?.name||'')}"></div><div><label>شماره تماس</label><input id="cPhone" inputmode="tel" value="${esc(x?.phone||'')}"></div></div><div class="row"><div><label>مبلغ کل طلب من</label><input id="cTotal" inputmode="numeric" required value="${x?.total||''}"></div><div><label>دریافت‌شده</label><input id="cPaid" inputmode="numeric" value="${x?.paid||0}"></div></div><div><label>تاریخ</label>${dateField('cDate',x?.date||today())}</div><div><label>توضیحات</label><textarea id="cNote">${esc(x?.note||'')}</textarea></div><button class="primary">ذخیره حساب همکار</button></form>`)}
+function saveCoworker(e,id){e.preventDefault();let a=active(),x={id:id||uid(),name:$('cName').value.trim(),phone:$('cPhone').value.trim(),total:num($('cTotal').value),paid:num($('cPaid').value),date:readJalali('cDate'),note:$('cNote').value.trim()};if(!x.name||!x.total)return;let old=a.coworkers.find(c=>c.id===id);old?Object.assign(old,x):a.coworkers.push(x);save();closeModal();toast('حساب همکار ذخیره شد')}
+function deleteCoworker(id){if(confirm('حساب این همکار حذف شود؟')){active().coworkers=active().coworkers.filter(x=>x.id!==id);save();toast('حساب همکار حذف شد')}}
+function addCoworkerPayment(id){let c=active().coworkers.find(x=>x.id===id);if(!c)return;let v=prompt(`مبلغ دریافتی از ${c.name} را وارد کنید:`,coworkerRemaining(c));if(v!==null){let p=num(v);if(p>0){c.paid=Math.min(c.total,c.paid+p);save();toast('دریافت همکار ثبت شد')}}}
+function renderCoworkerMini(){let box=$('coworkerMini');if(!box)return;let cs=active().coworkers||[],total=cs.reduce((s,c)=>s+coworkerRemaining(c),0);if(!cs.length){box.innerHTML='<div class="empty">هنوز حساب همکاری ثبت نشده است.<br><button class="secondary" style="margin-top:8px" onclick="openCoworker()">+ ثبت اولین همکار</button></div>';return}box.innerHTML=`<div class="alert green"><b>${money(total)}</b> طلب از همکاران</div><div class="list">${cs.slice().sort((a,b)=>coworkerRemaining(b)-coworkerRemaining(a)).slice(0,3).map(c=>`<div class="item"><div><b>👤 ${esc(c.name)}</b><small>${c.phone?esc(c.phone):'بدون شماره'} • ${formatDate(c.date)}</small></div><div class="actions"><strong class="money negative">${money(coworkerRemaining(c))}</strong><button onclick="addCoworkerPayment('${c.id}')">دریافت</button><button onclick="openCoworker('${c.id}')">ویرایش</button></div></div>`).join('')}</div>${cs.length>3?`<button class="secondary" style="width:100%;margin-top:8px" onclick="showViewFromBottom('debts')">مشاهده همه طلب‌ها</button>`:''}`}
+function loanPaid(l){return (l.payments||[]).reduce((s,p)=>s+num(p.amount),0)}
+function loanRemaining(l){return Math.max(0,num(l.totalPayable)-loanPaid(l))}
+function loanPaidCount(l){return (l.payments||[]).length}
+function loanNextDate(l){let due=l.due;if(!due)return '';let j=g2j(...due.split('-').map(Number)), n=loanPaidCount(l), totalMonths=j[0]*12+(j[1]-1)+n, jy=Math.floor(totalMonths/12), jm=(totalMonths%12)+1, max=jm<=6?31:(jm<=11?30:(Date.UTC(...j2g(jy+1,1,1))-Date.UTC(...j2g(jy,12,1)))/86400000), jd=Math.min(j[2],max), g=j2g(jy,jm,jd);return `${g[0]}-${pad2(g[1])}-${pad2(g[2])}`}
+function loanBankOptions(selected){return BANKS.map(b=>`<option ${selected===b?'selected':''}>${b}</option>`).join('')}
+function openLoan(id=''){let a=active(),x=a.loans.find(l=>l.id===id);openModal(x?'ویرایش وام / قسط':'ثبت وام بانکی',`<form class="form" onsubmit="saveLoan(event,'${id}')"><div class="row"><div><label>بانک</label><select id="lBank" class="bank-select">${loanBankOptions(x?.bank||'')}</select></div><div><label>عنوان وام / تسهیلات</label><input id="lTitle" required value="${esc(x?.title||'وام جدید')}"></div></div><div class="row"><div><label>مبلغ دریافتی وام</label><input id="lPrincipal" inputmode="numeric" value="${x?.principal||''}"></div><div><label>مجموع مبلغ قابل پرداخت</label><input id="lTotal" inputmode="numeric" required value="${x?.totalPayable||''}"></div></div><div class="row"><div><label>مبلغ هر قسط</label><input id="lInstallment" inputmode="numeric" required value="${x?.installment||''}"></div><div><label>تعداد کل اقساط</label><input id="lCount" inputmode="numeric" required value="${x?.count||''}"></div></div><div><label>تاریخ اولین سررسید</label>${dateField('lDue',x?.due||today())}</div><div><label>توضیحات</label><textarea id="lNote">${esc(x?.note||'')}</textarea></div>${x?'':'<label style="display:flex;align-items:center;gap:8px;color:var(--text)"><input id="lIncome" type="checkbox"> مبلغ دریافت وام به عنوان درآمد ثبت شود</label>'}<div class="row"><button class="primary">ذخیره</button><button type="button" class="secondary" onclick="closeModal()">انصراف</button></div></form>`)}
+function saveLoan(e,id){e.preventDefault();try{let a=active(),old=a.loans.find(l=>l.id===id),x={id:id||uid(),bank:$('lBank').value,title:$('lTitle').value.trim(),principal:num($('lPrincipal').value),totalPayable:num($('lTotal').value),installment:num($('lInstallment').value),count:num($('lCount').value),due:readJalali('lDue'),note:$('lNote').value.trim(),payments:old?.payments||[]};if(!x.title||!x.totalPayable||!x.installment||!x.count)return;old?Object.assign(old,x):a.loans.push(x);if(!old&&$('lIncome')?.checked&&x.principal){a.transactions.push({id:uid(),type:'income',amount:x.principal,date:today(),note:`دریافت ${x.title} - ${x.bank}`,category:'وام بانکی'})}save();closeModal();toast('وام بانکی ذخیره شد')}catch(err){toast(err.message||'تاریخ را بررسی کنید')}}
+function addLoanPayment(id){let a=active(),l=a.loans.find(x=>x.id===id);if(!l)return;openModal('ثبت پرداخت قسط',`<form class="form" onsubmit="saveLoanPayment(event,'${id}')"><div class="alert green">مانده این وام: <b>${money(loanRemaining(l))}</b></div><label>مبلغ پرداخت</label><input id="lpAmount" inputmode="numeric" required value="${Math.min(num(l.installment),loanRemaining(l))}"><label>تاریخ پرداخت</label>${dateField('lpDate',today())}<label>توضیحات</label><input id="lpNote" value="قسط ${loanPaidCount(l)+1} - ${l.title}"><button class="primary">ثبت پرداخت</button></form>`)}
+function saveLoanPayment(e,id){e.preventDefault();try{let a=active(),l=a.loans.find(x=>x.id===id),amount=num($('lpAmount').value),date=readJalali('lpDate');if(!l||amount<=0||amount>loanRemaining(l))return;l.payments.push({id:uid(),amount,date,note:$('lpNote').value.trim()});a.transactions.push({id:uid(),type:'expense',amount,date,note:`🏦 ${l.bank} - ${l.title} - قسط ${loanPaidCount(l)}`,category:'قسط بانکی'});save();closeModal();toast('پرداخت قسط ثبت شد')}catch(err){toast(err.message||'تاریخ را بررسی کنید')}}
+function deleteLoan(id){if(confirm('این وام و تاریخچه اقساط حذف شود؟')){active().loans=active().loans.filter(x=>x.id!==id);save();toast('وام حذف شد')}}
+function renderLoans(){let a=active(),q=($('loanSearch')?.value||'').toLowerCase(),f=$('loanFilter')?.value||'',arr=(a.loans||[]).filter(l=>{let r=loanRemaining(l),done=r<=0,due=loanNextDate(l)||l.due,ov=r>0&&due<today();return(!q||(`${l.bank} ${l.title}`).toLowerCase().includes(q))&&(!f||(f==='open'&&r>0)||(f==='done'&&done)||(f==='overdue'&&ov))}).sort((x,y)=>(loanNextDate(x)||x.due).localeCompare(loanNextDate(y)||y.due));let rem=arr.reduce((s,l)=>s+loanRemaining(l),0),next=arr.filter(l=>loanRemaining(l)>0).sort((x,y)=>(loanNextDate(x)||x.due).localeCompare(loanNextDate(y)||y.due))[0];$('loansSummary').innerHTML=`<div class="stats" style="margin:0 0 12px"><div class="stat"><b>${money(rem)}</b><span>مانده کل وام‌ها</span></div><div class="stat"><b>${next?money(Math.min(num(next.installment),loanRemaining(next))):'—'}</b><span>قسط بعدی</span></div><div class="stat"><b>${next?formatDate(loanNextDate(next)||next.due):'—'}</b><span>سررسید بعدی</span></div></div>`;$('loansList').innerHTML=arr.length?arr.map(l=>{let rem=loanRemaining(l),cnt=loanPaidCount(l),pct=Math.min(100,loanPaid(l)/Math.max(1,num(l.totalPayable))*100),due=loanNextDate(l)||l.due,ov=rem>0&&due<today();return `<div class="loan-card"><div class="loan-top"><div class="bank-line">${bankIcon(l.bank||'بانک')}<div><strong>${esc(l.title)}</strong><div class="loan-bank">${esc(l.bank)}</div></div></div><b class="${rem?'negative':'success'}">${money(rem)}</b></div><div class="loan-meta"><span>قسط: ${money(l.installment)}</span><span>${fa(cnt)} از ${fa(l.count)} قسط</span><span class="${ov?'negative':''}">سررسید: ${formatDate(due)}</span></div><div class="progress"><i style="width:${pct}%"></i></div><div class="actions" style="margin-top:9px">${rem?`<button onclick="addLoanPayment('${l.id}')">💵 ثبت پرداخت قسط</button>`:''}<button onclick="loanHistory('${l.id}')">📋 تاریخچه</button><button onclick="openLoan('${l.id}')">✏️ ویرایش</button><button onclick="deleteLoan('${l.id}')">🗑️ حذف</button></div></div>`}).join(''):'<div class="empty">هنوز وام یا قسط بانکی ثبت نشده است.</div>'}
+function loanHistory(id){let l=active().loans.find(x=>x.id===id);if(!l)return;openModal('تاریخچه پرداخت اقساط',l.payments?.length?`<div class="list">${l.payments.map((p,i)=>`<div class="item"><div><b>قسط ${fa(i+1)}</b><small>${formatDate(p.date)}${p.note?' • '+esc(p.note):''}</small></div><strong>${money(p.amount)}</strong></div>`).join('')}</div>`:'<div class="empty">هنوز پرداختی ثبت نشده است.</div>')}
+
+function openGoal(id=''){let x=active().goals.find(g=>g.id===id);openModal(x?'ویرایش هدف':'هدف پس‌انداز',`<form class="form" onsubmit="saveGoal(event,'${id}')"><label>نام هدف</label><input id="gName" required value="${esc(x?.name||'مثلاً خرید گوشی جدید')}"><label>مبلغ هدف</label><input id="gTarget" inputmode="numeric" required value="${x?.target||''}"><button class="primary">ذخیره هدف</button></form>`)}
+function saveGoal(e,id){e.preventDefault();let a=active(),x={id:id||uid(),name:$('gName').value.trim(),target:num($('gTarget').value),saved:id?(a.goals.find(g=>g.id===id)?.saved||0):0,created:today()};let old=a.goals.find(g=>g.id===id);old?Object.assign(old,x):a.goals.push(x);save();closeModal();toast('هدف ذخیره شد')}
+function deleteGoal(id){if(confirm('هدف حذف شود؟')){active().goals=active().goals.filter(x=>x.id!==id);save()}}
+function goalHTML(arr){return arr.length?arr.map(g=>{let pct=Math.min(100,num(g.saved)/Math.max(1,num(g.target))*100);return `<div class="goal"><div class="goal-top"><strong>🎯 ${esc(g.name)}</strong><b>${fa(Math.round(pct))}٪</b></div><div class="nums">${money(g.saved)} از ${money(g.target)} • باقی‌مانده ${money(Math.max(0,num(g.target)-num(g.saved)))}</div><div class="progress"><i style="width:${pct}%"></i></div></div>`}).join(''):'<div class="empty">هدف پس‌اندازی ندارید.</div>'}
+function renderSavings(){let a=active();$('goalsList').innerHTML=(a.goals||[]).length?a.goals.map(g=>goalHTML([g])+`<div class="actions" style="margin:-5px 0 9px"><button onclick="openGoal('${g.id}')">✏️ ویرایش</button><button onclick="deleteGoal('${g.id}')">🗑️ حذف</button></div>`).join(''):'<div class="empty">هنوز هدف ثبت نشده است.</div>';let total=a.savings.reduce((s,x)=>s+num(x.amount),0);$('savingSummary').innerHTML=`<div class="alert green">مجموع پس‌انداز: <b>${money(total)}</b></div>`;let arr=[...a.savings].sort((x,y)=>y.date.localeCompare(x.date));$('savingHistory').innerHTML=arr.length?arr.map(x=>`<div class="item"><div><b>💰 ${money(x.amount)}</b><small>${formatDate(x.date)}${x.note?' • '+esc(x.note):''}</small></div><button class="danger" onclick="deleteSaving('${x.id}')">حذف</button></div>`).join(''):'<div class="empty">هنوز پس‌اندازی ثبت نشده است.</div>'}
+function openSaving(){let goals=active().goals;openModal('ثبت پس‌انداز',`<form class="form" onsubmit="saveSaving(event)"><label>مبلغ</label><input id="sAmount" inputmode="numeric" required><label>تاریخ</label>${dateField("sDate",today())}<label>هدف (اختیاری)</label><select id="sGoal"><option value="">بدون هدف</option>${goals.map(g=>`<option value="${g.id}">${esc(g.name)}</option>`).join('')}</select><label>توضیحات</label><input id="sNote"><button class="primary">ثبت پس‌انداز</button></form>`)}
+function saveSaving(e){e.preventDefault();let a=active(),x={id:uid(),amount:num($('sAmount').value),date:readJalali('sDate'),note:$('sNote').value.trim(),goalId:$('sGoal').value};if(!x.amount)return;a.savings.push(x);if(x.goalId){let g=a.goals.find(g=>g.id===x.goalId);if(g)g.saved=num(g.saved)+x.amount}save();closeModal();toast('پس‌انداز ثبت شد')}
+function deleteSaving(id){if(confirm('این پس‌انداز حذف شود؟')){let a=active(),x=a.savings.find(s=>s.id===id);if(x?.goalId){let g=a.goals.find(g=>g.id===x.goalId);if(g)g.saved=Math.max(0,num(g.saved)-num(x.amount))}a.savings=a.savings.filter(s=>s.id!==id);save()}}
+function spentCat(cat,mo){return active().transactions.filter(x=>x.type==='expense'&&x.category===cat&&monthKey(x.date)===mo).reduce((s,x)=>s+num(x.amount),0)}
+function budgetHTML(arr){return arr.length?arr.map(b=>{let used=spentCat(b.category,b.month),pct=Math.min(100,used/Math.max(1,num(b.limit))*100);return `<div class="goal"><div class="goal-top"><strong>📊 ${esc(b.category)}</strong><b>${fa(Math.round(pct))}٪</b></div><div class="nums">${money(used)} از ${money(b.limit)} • ${formatJMonth(b.month)}</div><div class="progress"><i style="width:${pct}%"></i></div></div>`}).join(''):'<div class="empty">بودجه‌ای برای این ماه ثبت نشده.</div>'}
+function openBudget(id=''){let x=active().budgets.find(b=>b.id===id),mo=x?.month||currentJMonth();openModal(x?'ویرایش بودجه':'بودجه ماهانه',`<form class="form" onsubmit="saveBudget(event,'${id}')"><label>دسته‌بندی هزینه</label><select id="bCat">${DEFAULT_CATS.map(c=>`<option ${x?.category===c?'selected':''}>${c}</option>`).join('')}</select><div class="row"><div><label>سقف بودجه</label><input id="bLimit" inputmode="numeric" required value="${x?.limit||''}"></div><div><label>ماه بودجه (شمسی)</label><input id="bMonth" type="text" inputmode="numeric" required placeholder="۱۴۰۵/۰۷" value="${mo?formatJMonth(mo):''}"></div></div><button class="primary">ذخیره بودجه</button></form>`)}
+function saveBudget(e,id){e.preventDefault();try{let a=active(),v=$('bMonth').value.replace(/[۰-۹]/g,d=>'۰۱۲۳۴۵۶۷۸۹'.indexOf(d)).replace(/[-.]/g,'/'),p=v.split('/').map(Number);if(p.length!==2||p[0]<1300||p[1]<1||p[1]>12)throw new Error('ماه شمسی نامعتبر است');let g=j2g(p[0],p[1],1),x={id:id||uid(),category:$('bCat').value,limit:num($('bLimit').value),month:`${g[0]}-${pad2(g[1])}`},old=a.budgets.find(b=>b.id===id);old?Object.assign(old,x):a.budgets.push(x);save();closeModal();toast('بودجه ذخیره شد')}catch(err){toast(err.message||'ماه را بررسی کنید')}}
+function deleteBudget(id){if(confirm('بودجه حذف شود؟')){active().budgets=active().budgets.filter(x=>x.id!==id);save()}}
+function renderBudgets(){let a=active();$('budgetsList').innerHTML=a.budgets.length?a.budgets.slice().sort((x,y)=>y.month.localeCompare(x.month)).map(b=>budgetHTML([b])+`<div class="actions" style="margin:-4px 0 9px"><button onclick="openBudget('${b.id}')">✏️ ویرایش</button><button onclick="deleteBudget('${b.id}')">🗑️ حذف</button></div>`).join(''):'<div class="empty">هنوز بودجه‌ای ثبت نشده است.</div>'}
+function showView(id,btn,fromHistory=false){let target=$(id);if(!target)return;document.querySelectorAll('.view').forEach(v=>v.classList.add('hidden'));target.classList.remove('hidden');document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));btn?.classList.add('active');document.querySelectorAll('#bottomNav button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));if(id==='reports')renderReports();if(id==='loans')renderLoans();if(id==='transactions')renderTransactions();if(id==='debts')renderDebts();if(id==='budgets')renderBudgets();if(id==='savings')renderSavings();if(id==='dashboard'){renderDashboard();setTimeout(drawMainChart,40)}closeMoreNav();if(!fromHistory){let hash='#'+id;if(location.hash!==hash)history.pushState({view:id},'',location.pathname+location.search+hash)}window.scrollTo(0,0);requestAnimationFrame(()=>{if(id==='dashboard')drawMainChart()})}
+function showSettingsFromBottom(){closeMoreNav();openSettings();document.querySelectorAll('#bottomNav button').forEach(b=>b.classList.toggle('active',b.dataset.view==='settings'))}
+window.addEventListener('popstate',()=>{let id=(location.hash||'#dashboard').slice(1);if($(id))showView(id,document.querySelector('#bottomNav button[data-view="'+id+'"]'),true);else showView('dashboard',document.querySelector('#bottomNav button[data-view="dashboard"]'),true)});
+function showViewFromBottom(id){let btn=document.querySelector('#bottomNav button[data-view="'+id+'"]');showView(id,btn)}
+function toggleMoreNav(){let m=$('moreMenu');m.classList.toggle('hidden');document.querySelector('#bottomNav button[data-view="more"]')?.classList.toggle('active',!m.classList.contains('hidden'))}
+function closeMoreNav(){let m=$('moreMenu');if(m)m.classList.add('hidden')}
+
+function drawSpark(id,values,color='#0a84ff'){
+ let c=$(id);if(!c)return;let ctx=c.getContext('2d'),w=Math.max(80,c.clientWidth)*devicePixelRatio,h=Math.max(30,c.clientHeight)*devicePixelRatio;c.width=w;c.height=h;ctx.clearRect(0,0,w,h);let max=Math.max(1,...values),min=Math.min(...values),range=Math.max(1,max-min);ctx.beginPath();values.forEach((v,i)=>{let x=6*devicePixelRatio+(w-12*devicePixelRatio)*(i/(values.length-1||1)),y=5*devicePixelRatio+(h-10*devicePixelRatio)*(1-(v-min)/range);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.strokeStyle=color;ctx.lineWidth=2*devicePixelRatio;ctx.lineCap='round';ctx.stroke();
+}
+function renderWeeklyPremium(){let a=active(),days=[];for(let i=6;i>=0;i--){let d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-i);let iso=localISODate(d);let inc=a.transactions.filter(x=>x.date===iso&&x.type==='income').reduce((s,x)=>s+num(x.amount),0),exp=a.transactions.filter(x=>x.date===iso&&x.type==='expense').reduce((s,x)=>s+num(x.amount),0);days.push({iso,net:inc-exp,inc,exp})}let net=days.reduce((s,x)=>s+x.net,0);if($('weeklyNet'))$('weeklyNet').textContent=money(net);drawSpark('weeklyTrend',days.map(x=>x.net),'#0a84ff');drawSpark('incomeSpark',days.map(x=>x.inc),'#16a34a');drawSpark('expenseSpark',days.map(x=>x.exp),'#dc2626');let today=days[6]?.net||0,yesterday=days[5]?.net||0,d=today-yesterday;let el=$('balanceDelta');if(el){el.className='balance-delta '+(d>0?'up':d<0?'down':'flat');el.textContent=d>0?`▲ ${money(Math.abs(d))} بهتر از دیروز`:d<0?`▼ ${money(Math.abs(d))} کمتر از دیروز`:'بدون تغییر نسبت به دیروز'} }
+function renderBalanceDelta(){let a=active(),now=new Date();now.setHours(0,0,0,0);let iso=localISODate(now),y=new Date(now);y.setDate(y.getDate()-1);let yi=localISODate(y),netFor=d=>a.transactions.filter(x=>x.date===d).reduce((s,x)=>s+(x.type==='income'?num(x.amount):-num(x.amount)),0),d=netFor(iso)-netFor(yi),el=$('balanceDelta');if(!el)return;el.className='balance-delta '+(d>0?'up':d<0?'down':'flat');el.textContent=d>0?`▲ ${money(Math.abs(d))} بهتر از دیروز`:d<0?`▼ ${money(Math.abs(d))} کمتر از دیروز`:'بدون تغییر نسبت به دیروز'}
+
+function drawLine(canvas,series,labels){if(!canvas)return;let cssW=Math.max(160,canvas.clientWidth||canvas.parentElement?.clientWidth||160),cssH=Math.max(160,canvas.clientHeight||210),dpr=Math.min(window.devicePixelRatio||1,2),w=Math.round(cssW*dpr),h=Math.round(cssH*dpr);canvas.width=w;canvas.height=h;canvas.style.width=cssW+'px';canvas.style.height=cssH+'px';let ctx=canvas.getContext('2d');ctx.clearRect(0,0,w,h);let vals=series.flatMap(s=>(s.values||[]).map(v=>Number(v)||0));let min=Math.min(0,...vals),max=Math.max(0,...vals);if(min===max)max=min+1;let pad={l:12*dpr,r:10*dpr,t:15*dpr,b:30*dpr},W=w-pad.l-pad.r,H=h-pad.t-pad.b;ctx.font=`${10*dpr}px Tahoma`;let yOf=v=>pad.t+H-((v-min)/(max-min))*H;labels.forEach((lab,i)=>{let x=pad.l+(W*(labels.length<=1?0.5:i/(labels.length-1)));ctx.fillStyle=getComputedStyle(document.body).getPropertyValue('--muted');ctx.textAlign='center';ctx.fillText(lab,x,h-7*dpr)});series.forEach(s=>{let values=(s.values||[]).map(v=>Number(v)||0);if(!values.length)return;ctx.beginPath();values.forEach((v,i)=>{let x=pad.l+(W*(values.length<=1?0.5:i/(values.length-1))),y=yOf(v);i?ctx.lineTo(x,y):ctx.moveTo(x,y)});ctx.strokeStyle=s.color;ctx.lineWidth=2.3*dpr;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();values.forEach((v,i)=>{let x=pad.l+(W*(values.length<=1?0.5:i/(values.length-1))),y=yOf(v);ctx.beginPath();ctx.arc(x,y,3*dpr,0,Math.PI*2);ctx.fillStyle=s.color;ctx.fill()})})}
+function drawMainChart(){let a=active(),months=[];let d=new Date();d.setDate(1);for(let i=5;i>=0;i--){let x=new Date(d);x.setMonth(d.getMonth()-i);months.push(localISOMonth(x))}let labels=months.map(m=>formatJMonth(m).replace(/^[^ ]+ /,'')),ser=['income','expense'].map((type,j)=>({color:j?'#dc2626':'#2563eb',values:months.map(m=>a.transactions.filter(x=>x.type===type&&monthKey(x.date)===m).reduce((s,x)=>s+num(x.amount),0))}));ser.push({color:'#16a34a',values:months.map(m=>a.savings.filter(x=>monthKey(x.date)===m).reduce((s,x)=>s+num(x.amount),0))});drawLine($('mainChart'),ser,labels)}
+function setReport(m){reportMode=m;renderReports()}
+function reportGroups(){let a=active(),tx=a.transactions||[],map=new Map();let key=x=>reportMode==='day'?x.date:reportMode==='year'?x.date.slice(0,4):x.date.slice(0,7);tx.forEach(x=>{let k=key(x);if(!map.has(k))map.set(k,{income:0,expense:0});map.get(k)[x.type]+=num(x.amount)});return [...map.entries()].sort((a,b)=>a[0].localeCompare(b[0])).slice(-12)}
+function renderReports(){let g=reportGroups(),income=g.reduce((s,x)=>s+x[1].income,0),expense=g.reduce((s,x)=>s+x[1].expense,0),saving=active().savings.reduce((s,x)=>s+num(x.amount),0);$('reportSummary').innerHTML=`<div class="stats" style="margin:0 0 12px"><div class="stat"><b>${money(income)}</b><span>درآمد</span></div><div class="stat"><b>${money(expense)}</b><span>هزینه</span></div><div class="stat"><b>${money(saving)}</b><span>پس‌انداز</span></div><div class="stat"><b>${money(income-expense-saving)}</b><span>سود/مانده</span></div><div class="stat"><b>${money(totals().debt)}</b><span>طلب</span></div></div>`;drawLine($('reportChart'),[{color:'#2563eb',values:g.map(x=>x[1].income)},{color:'#dc2626',values:g.map(x=>x[1].expense)}],g.map(x=>x[0].length===10?isoToJalali(x[0]):(x[0].length===7?formatJMonth(x[0]):fa(x[0]))));$('reportTable').innerHTML=g.length?`<div class="table-wrap"><table class="table"><tr><th>دوره</th><th>درآمد</th><th>هزینه</th><th>خالص</th></tr>${g.map(x=>`<tr><td>${x[0].length===10?isoToJalali(x[0]):(x[0].length===7?formatJMonth(x[0]):fa(x[0]))}</td><td class="success">${money(x[1].income)}</td><td class="negative">${money(x[1].expense)}</td><td>${money(x[1].income-x[1].expense)}</td></tr>`).join('')}</table></div>`:'<div class="empty">داده‌ای برای گزارش نیست.</div>'}
+function csvCell(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}
+function exportCSV(){let rows=[['حساب','نوع','مبلغ','تاریخ','دسته‌بندی','توضیحات']];Object.entries(data.accounts).forEach(([acc,a])=>(a.transactions||[]).forEach(x=>rows.push([acc,x.type,x.amount,x.date,x.category,x.note])));let csv='\uFEFF'+rows.map(r=>r.map(csvCell).join(',')).join('\n');download(csv,'financial-transactions.csv','text/csv;charset=utf-8')}
+function exportJSON(){download(JSON.stringify(data,null,2),'financial-manager-backup.json','application/json')}
+function exportAll(){let pack={exportedAt:new Date().toISOString(),app:'financial-manager-pro',data};download(JSON.stringify(pack,null,2),'financial-manager-complete-backup.json','application/json')}
+function download(content,name,type){let b=new Blob([content],{type}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
+function importJSON(){let i=document.createElement('input');i.type='file';i.accept='.json';i.onchange=()=>{let r=new FileReader();r.onload=()=>{try{let p=JSON.parse(r.result),d=p.data||p;if(!d.accounts||!d.accounts.personal||!d.accounts.shop)throw 0;data=d;save();closeSettings();toast('پشتیبان با موفقیت وارد شد')}catch{alert('فایل پشتیبان معتبر این برنامه نیست.')}};r.readAsText(i.files[0])};i.click()}
+function togglePrivacy(){privacy=!privacy;renderAll();toast(privacy?'مبالغ مخفی شد':'مبالغ نمایش داده شد')}
+function toggleDark(){data.settings.dark=!data.settings.dark;document.body.classList.toggle('dark',data.settings.dark);localStorage.setItem(KEY,JSON.stringify(data));toast(data.settings.dark?'حالت تاریک فعال شد':'حالت روشن فعال شد')}
+function openSettings(){ $('personalName').value=data.settings.personalName;$('shopName').value=data.settings.shopName;renderBankAccounts();if($('reminderToggle'))$('reminderToggle').checked=data.settings.reminders!==false;$('settingsModal').classList.remove('hidden')}
+function closeSettings(){$('settingsModal').classList.add('hidden');let current=document.querySelector('.view:not(.hidden)')?.id||'dashboard';document.querySelectorAll('#bottomNav button').forEach(b=>b.classList.toggle('active',b.dataset.view===current))}
+function saveNames(){data.settings.personalName=$('personalName').value.trim()||'حساب شخصی';data.settings.shopName=$('shopName').value.trim()||'حساب مغازه تعمیرات موبایل';save();closeSettings();toast('نام حساب‌ها ذخیره شد')}
+function setPin(){let p=prompt('یک PIN چهار تا هشت رقمی وارد کنید:','');if(p===null)return;if(!/^\d{4,8}$/.test(p)){alert('PIN باید ۴ تا ۸ رقم باشد.');return}data.settings.pin=p;save();toast('PIN تنظیم شد')}
+function lockApp(){if(!data.settings.pin){alert('ابتدا برای برنامه PIN تنظیم کنید.');return}$('unlockPin').value='';$('lockScreen').classList.remove('hidden');closeSettings()}
+function unlock(){let p=$('unlockPin').value;if(p===data.settings.pin){$('lockScreen').classList.add('hidden');$('lockMsg').textContent=''}else $('lockMsg').textContent='PIN اشتباه است.'}
+function toggleFab(){fabOpen=!fabOpen;$('fabMenu').classList.toggle('hidden',!fabOpen)}
+function clearAll(){if(confirm('تمام اطلاعات هر دو حساب از این دستگاه حذف شود؟ این کار قابل برگشت نیست.')){localStorage.removeItem(KEY);location.reload()}}
+document.addEventListener('click',e=>{if(!e.target.closest('.premium-search')&&!e.target.closest('#searchResults'))$('searchResults')?.classList.add('hidden')});
+function init(){
+ document.body.classList.toggle('dark',!!data.settings.dark);
+ updateTodayJalali();
+ if(data.settings.pin)$('lockScreen').classList.remove('hidden');
+ renderAll();
+ $('profileTitle').textContent=data.settings.personalName||'حساب شخصی'; $('profileAvatar').textContent=(data.settings.personalName||'حساب شخصی').trim().charAt(0)||'ح';
+ if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
+init();
+if(location.hash){let id=location.hash.slice(1);if($(id))showView(id,document.querySelector('#bottomNav button[data-view="'+id+'"]'),true)}
+</script>
+</body>
+</html>
