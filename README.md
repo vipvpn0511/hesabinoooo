@@ -1,11 +1,6 @@
-حسابینو v19 — Stability / Date / Chart Fixes
-- Local-date safe: no UTC date shifting for daily/monthly app dates.
-- Jalali date input/picker validation and month navigation hardened.
-- Persian weekday/date at top corrected.
-- Income, expense and customer/debt date saving validates Jalali dates.
-- Bottom navigation selector fixed.
-- Android/browser back navigation uses view history without hanging.
-- Charts handle zero/negative values and resize safely.
-- Dark mode receives complete dark overrides.
-- Sticky header/view animation removed to eliminate the moving white-line artifact.
-- Service-worker cache bumped to v19.
+حسابینو v25 Final
+- نسخه کاملاً خالی از اطلاعات قبلی
+- تب‌بار شیشه‌ای جدید و پایدار با ۵ بخش و دکمه + شناور
+- حذف کامل خط/افکت سفید متحرک بالای صفحه
+- نمودارهای داشبورد و گزارش با رسم responsive و ResizeObserver
+- RTL / PWA / آفلاین / ذخیره‌سازی محلی
